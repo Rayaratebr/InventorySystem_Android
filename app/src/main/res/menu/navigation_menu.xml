@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:title="Customer"
-        android:id="@+id/nav_customer"/>
 
-    <item
-        android:title="Order"
-        android:id="@+id/nav_order"/>
-    <item
-        android:title="Products"
-        android:id="@+id/nav_product"/>
+        <item android:title="Customer" android:id="@+id/nav_customer">
+        <menu>
+            <item
+                android:title="Add a New Customer"
+                android:id="@+id/nav_customer_add"/>
+            <item android:title="Display All Customers"
+                android:id="@+id/nav_customer_display"/>
+            <item android:title="Delete a Customer"
+                android:id="@+id/nav_customer_delete"/>
+            <item android:title="Assign an Order to Customer"
+                android:id="@+id/nav_customer_order"/>
+        </menu>
+        </item>
+    <item android:title="Order" android:id="@+id/nav_order">
+        <menu>
+            <item
+                android:title="Add a New Order"
+                android:id="@+id/nav_order_add"/>
+            <item android:title="Display All Orders"
+                android:id="@+id/nav_order_display"/>
+            <item android:title="Delete an Order"
+                android:id="@+id/nav_order_delete"/>
+            <item android:title="Edit an Order"
+                android:id="@+id/nav_order_edit"/>
+        </menu>
+    </item>
+
+    <item android:title="Products" android:id="@+id/nav_product">
+        <menu>
+            <item android:title="Add a New Product"
+                android:id="@+id/nav_product_add"/>
+            <item android:title="Delete a Product"
+                android:id="@+id/nav_product_delete"/>
+            <item android:title="Display All Products"
+                android:id="@+id/nav_product_display"/>
+        </menu>
+
+    </item>
+
     <item
         android:title="Close"
         android:id="@+id/nav_close"/>
