@@ -1,6 +1,8 @@
 package com.example.dell.inventory_system_android;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -18,12 +20,26 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private ActionBarDrawerToggle aToggle;
     AlertDialog.Builder builder;
     int deletedID;
+   /* DisplayFragment displayFragment;
+    FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();*/
+
+    static int currentCustID = 0;
+
+   /* public static int getCurrentCustID() {
+        return currentCustID;
+    }
+
+    public static void setCurrentCustID(int currentCustID2) {
+        currentCustID = currentCustID2;
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+     //   displayFragment = new DisplayFragment();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         aToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open,R.string.close);
 
@@ -88,12 +104,14 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             MainActivity.this.startActivity(myIntent);
         }
         if (id == R.id.nav_customer_display){
-            //hide the activity
-            finish();
-            //Start the New Customer Activity
-            Intent myIntent=new Intent(MainActivity.this,
-                    ViewCustomerActivity.class);
-            MainActivity.this.startActivity(myIntent);
+          /*  fragmentTransaction.add(R.id.linearLayout,displayFragment,"FA");
+            getFragmentManager().beginTransaction().add(R.id.drawer_layout,displayFragment,"FA").commit();
+            fragmentTransaction.commit();
+            if (displayFragment.isAdded()){
+                builder.show();
+                displayFragment.changeData(R.id.nav_customer_display);
+            }*/
+
         }
         if (id == R.id.nav_customer_delete){
             builder.show();
@@ -127,6 +145,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
 
 
+
         return false;
     }
+
 }
