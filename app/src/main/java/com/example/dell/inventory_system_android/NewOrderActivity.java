@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.example.dell.inventory_system_android.Models.Order;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -63,32 +65,29 @@ public class NewOrderActivity extends AppCompatActivity {
 
             }
         };
-        orderDateTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        orderDateTxt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
+            public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if (hasFocus) {
-                    DatePickerDialog dpd = new DatePickerDialog(NewOrderActivity.this, orderDateListener, myCalendar
-                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                            myCalendar.get(Calendar.DAY_OF_MONTH));
-                    dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                    dpd.show();
-                }
+                DatePickerDialog dpd = new DatePickerDialog(NewOrderActivity.this, orderDateListener, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                dpd.show();
             }
         });
 
 
-        orderDueDateTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        orderDueDateTxt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
+            public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if (hasFocus) {
-                    DatePickerDialog dpd = new DatePickerDialog(NewOrderActivity.this, orderDueDateListener, myCalendar
-                            .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                            myCalendar.get(Calendar.DAY_OF_MONTH));
-                    dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                    dpd.show();
-                }
+                DatePickerDialog dpd = new DatePickerDialog(NewOrderActivity.this, orderDueDateListener, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                dpd.show();
+
             }
         });
 

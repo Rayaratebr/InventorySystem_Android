@@ -1,4 +1,4 @@
-package com.example.dell.inventory_system_android;
+package com.example.dell.inventory_system_android.Models;
 
 import java.util.ArrayList;
 

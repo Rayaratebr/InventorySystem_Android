@@ -1,12 +1,8 @@
-package com.example.dell.inventory_system_android;
+package com.example.dell.inventory_system_android.Models;
 
 import java.util.Date;
 
-/**
- * Created by dell on 12/10/2017.
- */
-
-class Payment {
+public class Payment {
     private int id;
     private double amount;
     private Date payment_date;//TODO: check date type

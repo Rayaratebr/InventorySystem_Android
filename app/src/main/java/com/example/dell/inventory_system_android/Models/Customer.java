@@ -1,12 +1,8 @@
-package com.example.dell.inventory_system_android;
+package com.example.dell.inventory_system_android.Models;
 
 import java.util.ArrayList;
 
-/**
- * Created by dell on 12/10/2017.
- */
-
-class Customer {
+public class Customer {
     private int id;
     private String name;
     private String address;

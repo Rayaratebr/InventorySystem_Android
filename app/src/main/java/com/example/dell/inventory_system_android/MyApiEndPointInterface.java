@@ -1,6 +1,11 @@
 package com.example.dell.inventory_system_android;
 
 
+import com.example.dell.inventory_system_android.Models.Customer;
+import com.example.dell.inventory_system_android.Models.Order;
+import com.example.dell.inventory_system_android.Models.Payment;
+import com.example.dell.inventory_system_android.Models.Product;
+
 import java.util.List;
 
 import retrofit2.Call;

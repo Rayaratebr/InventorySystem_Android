@@ -1,10 +1,7 @@
-package com.example.dell.inventory_system_android;
+package com.example.dell.inventory_system_android.Models;
 
-/**
- * Created by dell on 12/10/2017.
- */
 
-class Product {
+public class Product {
 
     private int id;
     private double standard_price;

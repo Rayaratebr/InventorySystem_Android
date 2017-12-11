@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.dell.inventory_system_android.Models.Customer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +31,11 @@ public class DisplayFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_display, container, false);
         List<String> customersString = new ArrayList<String>();
-        for (int i = 0 ;i < Customer.getCustomersList().size(); i++) customersString.add(Customer.getCustomersList().get(i).toString());
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,customersString);
+        for (int i = 0; i < Customer.getCustomersList().size(); i++)
+            customersString.add(Customer.getCustomersList().get(i).toString());
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, customersString);
         // Inflate the layout for this fragment
-        ListView lv = (ListView)rootView.findViewById(R.id.listViewFragment);
+        ListView lv = (ListView) rootView.findViewById(R.id.listViewFragment);
         lv.setAdapter(adapter);
         return rootView;
     }
