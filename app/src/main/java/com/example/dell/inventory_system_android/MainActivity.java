@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
      //   displayFragment = new DisplayFragment();
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
 
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -148,5 +151,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         return false;
     }
+
+
+
 
 }

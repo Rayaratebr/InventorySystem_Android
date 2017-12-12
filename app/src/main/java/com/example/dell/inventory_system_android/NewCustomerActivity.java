@@ -64,8 +64,8 @@ public class NewCustomerActivity extends AppCompatActivity {
             }
         });
 
-        final int currentCustomerID = MainActivity.currentCustID;
-        txtCustID.setText(currentCustomerID);
+//        final int currentCustomerID = MainActivity.currentCustID;
+//        txtCustID.setText(currentCustomerID);
 
 
 
