@@ -11,50 +11,52 @@
         android:id="@+id/orderDueDateTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/addOrderBtn"
-        android:layout_alignRight="@+id/addOrderBtn"
-        android:layout_centerVertical="true"
         android:clickable="true"
         android:editable="false"
         android:hint="dd/mm/yyyy"
-        android:inputType="none" />
+        android:inputType="none"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/orderDateTxt"
+        android:layout_alignStart="@+id/orderDateTxt"
+        android:layout_alignRight="@+id/orderDateTxt"
+        android:layout_alignEnd="@+id/orderDateTxt" />
 
     <EditText
         android:id="@+id/orderDateTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/orderDueDateTxt"
-        android:layout_alignLeft="@+id/orderDueDateTxt"
-        android:layout_alignStart="@+id/orderDueDateTxt"
         android:layout_marginBottom="27dp"
         android:clickable="true"
         android:editable="false"
         android:hint="dd/mm/yyyy"
-        android:inputType="none" />
+        android:inputType="none"
+        android:layout_above="@+id/orderDueDateTxt"
+        android:layout_alignLeft="@+id/custIDOrd"
+        android:layout_alignStart="@+id/custIDOrd"
+        android:layout_alignRight="@+id/custIDOrd"
+        android:layout_alignEnd="@+id/custIDOrd" />
 
     <Button
         android:id="@+id/addOrderBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Add Order"
-        android:layout_below="@+id/orderDueDateTxt"
         android:layout_marginTop="43dp"
-        android:layout_alignLeft="@+id/btnBckOrd"
-        android:layout_alignStart="@+id/btnBckOrd"
-        android:layout_alignRight="@+id/btnCclOrd"
-        android:layout_alignEnd="@+id/btnCclOrd" />
+        android:layout_below="@+id/orderDueDateTxt"
+        android:layout_alignLeft="@+id/textView10"
+        android:layout_alignStart="@+id/textView10" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="76dp"
+        android:layout_marginStart="76dp"
+        android:text="Order Date"
         android:layout_alignBaseline="@+id/orderDateTxt"
         android:layout_alignBottom="@+id/orderDateTxt"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:text="Order Date" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textView10"
@@ -69,9 +71,9 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="27dp"
         android:text="Customer ID"
-        android:layout_above="@+id/textView9"
+        android:layout_above="@+id/orderDateTxt"
         android:layout_alignLeft="@+id/textView9"
         android:layout_alignStart="@+id/textView9" />
 
@@ -83,26 +85,17 @@
         android:layout_alignBaseline="@+id/btnBckOrd"
         android:layout_alignBottom="@+id/btnBckOrd"
         android:layout_toRightOf="@+id/btnBckOrd"
-        android:layout_toEndOf="@+id/btnBckOrd" />
+        android:layout_alignRight="@+id/buttonClearOrder"
+        android:layout_alignEnd="@+id/buttonClearOrder" />
 
     <Button
         android:id="@+id/btnBckOrd"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:layout_marginTop="54dp"
-        android:layout_alignTop="@+id/addOrderBtn"
-        android:layout_toRightOf="@+id/textView11"
-        android:layout_toEndOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/txtViewCusIDOrd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView11"
-        android:layout_alignBottom="@+id/textView11"
-        android:layout_alignLeft="@+id/orderDateTxt"
-        android:layout_alignStart="@+id/orderDateTxt" />
+        android:layout_below="@+id/addOrderBtn"
+        android:layout_alignLeft="@+id/addOrderBtn"
+        android:layout_alignStart="@+id/addOrderBtn" />
 
     <TextView
         android:id="@+id/txtViewOrdID"
@@ -113,5 +106,36 @@
         android:layout_toLeftOf="@+id/btnCclOrd"
         android:layout_toStartOf="@+id/btnCclOrd"
         android:text="Order #" />
+
+    <TextView
+        android:id="@+id/orderID"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtViewOrdID"
+        android:layout_toEndOf="@+id/txtViewOrdID"
+        android:layout_toRightOf="@+id/txtViewOrdID" />
+
+    <EditText
+        android:id="@+id/custIDOrd"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignBaseline="@+id/textView11"
+        android:layout_alignBottom="@+id/textView11"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
+
+    <Button
+        android:id="@+id/buttonClearOrder"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:layout_alignBaseline="@+id/addOrderBtn"
+        android:layout_alignBottom="@+id/addOrderBtn"
+        android:layout_toRightOf="@+id/addOrderBtn"
+        android:layout_toEndOf="@+id/addOrderBtn" />
 </android.widget.RelativeLayout>
 

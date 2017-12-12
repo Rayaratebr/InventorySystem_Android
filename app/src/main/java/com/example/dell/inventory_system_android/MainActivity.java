@@ -20,12 +20,12 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private ActionBarDrawerToggle aToggle;
     AlertDialog.Builder builder;
     int deletedID;
+    Intent myIntent;
    /* DisplayFragment displayFragment;
     FragmentManager fragmentManager = getFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();*/
 
-    static int currentCustID = 0;
-
+    static int currentCustID = 0 , currentOrderID = 0,currentProductID = 0;
    /* public static int getCurrentCustID() {
         return currentCustID;
     }
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         if (id == R.id.nav_customer_add){
             //hide the activity
-            finish();
+            //finish();
             //Start the New Customer Activity
             Intent myIntent=new Intent(MainActivity.this,
                     NewCustomerActivity.class);
@@ -119,31 +119,42 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         if (id == R.id.nav_customer_delete){
             builder.show();
             //TODO send the id to delete a customer
+            //deleteCustomer(id);
         }
         if (id == R.id.nav_order_delete){
             builder.show();
             //TODO send the id to delete an order
+            //deleteOrder(id);
         }
         if (id == R.id.nav_product_delete){
             builder.show();
             //TODO send the id to delete a product
+            //deleteProduct(id);
         }
 
         if (id == R.id.nav_customer_order){
             //hide the activity
-            finish();
+            //finish();
             //Start the New Customer Activity
-            Intent myIntent=new Intent(MainActivity.this,
+            myIntent=new Intent(MainActivity.this,
                     NewOrderActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
         if (id == R.id.nav_order_add){
             //hide the activity
-            finish();
+            //finish();
             //Start the New Customer Activity
-            Intent myIntent=new Intent(MainActivity.this,
+            myIntent=new Intent(MainActivity.this,
                     NewOrderActivity.class);
             MainActivity.this.startActivity(myIntent);
+        }
+        if (id == R.id.nav_product_add){
+            myIntent = new Intent(MainActivity.this,NewProductActivity.class);
+            MainActivity.this.startActivity(myIntent);
+        }
+
+        if (id == R.id.nav_close){
+            finish();
         }
 
 

@@ -8,12 +8,13 @@
 
 
     <TextView
-        android:id="@+id/textViewCustID"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtCustID"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp" />
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView5"
@@ -23,7 +24,7 @@
         android:text="Name"
         android:layout_marginLeft="58dp"
         android:layout_marginStart="58dp"
-        android:layout_below="@+id/textViewCustID"
+        android:layout_below="@+id/txtCustID"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -53,9 +54,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
+        android:layout_alignBaseline="@+id/textView6"
         android:layout_alignBottom="@+id/textView6"
-        android:layout_alignLeft="@+id/txtAddress"
-        android:layout_alignStart="@+id/txtAddress" />
+        android:layout_alignLeft="@+id/txtCustName"
+        android:layout_alignStart="@+id/txtCustName" />
 
     <EditText
         android:id="@+id/txtAddress"
@@ -63,39 +65,28 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPostalAddress"
-        android:layout_alignBottom="@+id/textView7"
-        android:layout_alignLeft="@+id/textViewCustID"
-        android:layout_alignStart="@+id/textViewCustID" />
-
-    <EditText
-        android:id="@+id/txtCustName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView5"
+        android:layout_above="@+id/btnAddCust"
         android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_alignStart="@+id/txtPhone" />
 
     <Button
         android:id="@+id/btnAddCust"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="65dp"
         android:text="Add Customer"
         android:layout_below="@+id/textView7"
-        android:layout_toLeftOf="@+id/btnCclCust"
-        android:layout_toStartOf="@+id/btnCclCust"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_alignRight="@+id/btnCclCust"
+        android:layout_alignEnd="@+id/btnCclCust"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
 
     <Button
         android:id="@+id/btnCclCust"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:layout_alignBaseline="@+id/btnAddCust"
-        android:layout_alignBottom="@+id/btnAddCust"
+        android:layout_below="@+id/btnAddCust"
         android:layout_alignRight="@+id/txtAddress"
         android:layout_alignEnd="@+id/txtAddress" />
 
@@ -104,9 +95,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Customer #"
-        android:layout_alignBaseline="@+id/textViewCustID"
-        android:layout_alignBottom="@+id/textViewCustID"
-        android:layout_alignRight="@+id/textViewCustID"
-        android:layout_alignEnd="@+id/textViewCustID" />
+        android:layout_above="@+id/textView5"
+        android:layout_toRightOf="@+id/textView7"
+        android:layout_toEndOf="@+id/textView7" />
+
+    <EditText
+        android:id="@+id/txtCustName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_alignBaseline="@+id/textView5"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <Button
+        android:id="@+id/btnClr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnCclCust"
+        android:layout_alignLeft="@+id/btnAddCust"
+        android:layout_alignStart="@+id/btnAddCust"
+        android:layout_toLeftOf="@+id/btnCclCust"
+        android:text="Clear" />
 
 </android.widget.RelativeLayout>

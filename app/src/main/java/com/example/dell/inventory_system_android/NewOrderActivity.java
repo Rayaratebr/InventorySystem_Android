@@ -1,11 +1,14 @@
 package com.example.dell.inventory_system_android;
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -22,7 +25,7 @@ import retrofit2.Response;
 public class NewOrderActivity extends AppCompatActivity {
     EditText orderDateTxt;
     EditText orderDueDateTxt;
-    Button addOrderBtn;
+    Button addOrderBtn, closeButton, backButton,clearButton;
     Calendar myCalendar;
     Order objOrder;
     DatePickerDialog.OnDateSetListener orderDateListener, orderDueDateListener;
@@ -38,6 +41,14 @@ public class NewOrderActivity extends AppCompatActivity {
         orderDateTxt = (EditText) findViewById(R.id.orderDateTxt);
         orderDueDateTxt = (EditText) findViewById(R.id.orderDueDateTxt);
         addOrderBtn = (Button) findViewById(R.id.addOrderBtn);
+
+        closeButton = (Button) findViewById(R.id.btnCclOrd);
+        backButton = (Button) findViewById(R.id.btnBckOrd);
+        clearButton = (Button) findViewById(R.id.buttonClearOrder);
+
+        final TextView orderId = (TextView) findViewById(R.id.orderID);
+        final EditText custIDOrder = (EditText) findViewById(R.id.custIDOrd);
+        orderId.setText(Integer.toString(MainActivity.currentOrderID));
 
         orderDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -95,6 +106,7 @@ public class NewOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO: check empty dates
+                //TODO SEND CUSTOMER ID AND ORDER DETAILS TO BE STORED
                 /*storing the new order to database using port request*/
                 Call<String> repos = Config.apiService.storeCustomerOrder(1, objOrder);
                 repos.enqueue(new Callback<String>() {
@@ -110,6 +122,30 @@ public class NewOrderActivity extends AppCompatActivity {
                         Toast.makeText(NewOrderActivity.this, "error", Toast.LENGTH_LONG).show();
                     }
                 });
+                (MainActivity.currentOrderID)++;
+            }
+        });
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent myIntent=new Intent(NewOrderActivity.this,
+                        MainActivity.class);
+                NewOrderActivity.this.startActivity(myIntent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               finish();
+            }
+        });
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                orderId.setText(Integer.toString(MainActivity.currentOrderID));
+                custIDOrder.setText("");
             }
         });
 
