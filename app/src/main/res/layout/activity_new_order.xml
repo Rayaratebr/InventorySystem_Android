@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dell.inventory_system_android.NewOrderActivity">
+    tools:context="com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity">
 
 
     <EditText
@@ -31,10 +31,10 @@
         android:hint="dd/mm/yyyy"
         android:inputType="none"
         android:layout_above="@+id/orderDueDateTxt"
-        android:layout_alignLeft="@+id/custIDOrd"
-        android:layout_alignStart="@+id/custIDOrd"
-        android:layout_alignRight="@+id/custIDOrd"
-        android:layout_alignEnd="@+id/custIDOrd" />
+        android:layout_alignLeft="@+id/customerIDTxt"
+        android:layout_alignStart="@+id/customerIDTxt"
+        android:layout_alignRight="@+id/customerIDTxt"
+        android:layout_alignEnd="@+id/customerIDTxt" />
 
     <Button
         android:id="@+id/addOrderBtn"
@@ -116,7 +116,7 @@
         android:layout_toRightOf="@+id/txtViewOrdID" />
 
     <EditText
-        android:id="@+id/custIDOrd"
+        android:id="@+id/customerIDTxt"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:ems="10"

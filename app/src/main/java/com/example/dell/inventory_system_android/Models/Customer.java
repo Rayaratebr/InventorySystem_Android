@@ -2,7 +2,7 @@ package com.example.dell.inventory_system_android.Models;
 
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer extends Parent{
     private int id;
     private String name;
     private String address;
@@ -13,14 +13,14 @@ public class Customer {
         return customersList;
     }
 
-    public Customer(){
+    public Customer() {
 
     }
 
     public Customer(String name, String address, String phone) {
         this.name = name;
-        this.phone= phone;
-        this.address=address;
+        this.phone = phone;
+        this.address = address;
     }
 
     public int getId() {
@@ -63,5 +63,10 @@ public class Customer {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    public String listDisplay() {
+
+        return "Name: " + name + ", Phone: " + phone;
     }
 }

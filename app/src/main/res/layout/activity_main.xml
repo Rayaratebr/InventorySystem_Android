@@ -18,6 +18,13 @@
 
     </android.support.design.widget.NavigationView>
 
+    <RelativeLayout
+        android:id="@+id/fragmentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </RelativeLayout>
+
 
 </android.support.v4.widget.DrawerLayout>
 

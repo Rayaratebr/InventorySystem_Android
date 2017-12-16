@@ -1,5 +1,5 @@
-package com.example.dell.inventory_system_android;
-import android.app.Activity;
+package com.example.dell.inventory_system_android.OrderActivities;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.dell.inventory_system_android.Config;
+import com.example.dell.inventory_system_android.Helpers;
+import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Order;
+import com.example.dell.inventory_system_android.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,11 +27,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NewOrderActivity extends AppCompatActivity {
-    EditText orderDateTxt;
-    EditText orderDueDateTxt;
-    Button addOrderBtn, closeButton, backButton,clearButton;
+    EditText orderDateTxt, orderDueDateTxt, customerIDTxt;
+    Button addOrderBtn, closeButton, backButton, clearButton;
     Calendar myCalendar;
     Order objOrder;
+    int currentCustomerID;
+    Bundle params;
     DatePickerDialog.OnDateSetListener orderDateListener, orderDueDateListener;
 
 
@@ -35,19 +40,32 @@ public class NewOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
-        objOrder = new Order();
+
 
         myCalendar = Calendar.getInstance();
         orderDateTxt = (EditText) findViewById(R.id.orderDateTxt);
         orderDueDateTxt = (EditText) findViewById(R.id.orderDueDateTxt);
-        addOrderBtn = (Button) findViewById(R.id.addOrderBtn);
+        final TextView orderId = (TextView) findViewById(R.id.orderID);
+        customerIDTxt = (EditText) findViewById(R.id.customerIDTxt);
 
+
+        objOrder = new Order();
+        params = getIntent().getExtras();
+        currentCustomerID = Helpers.getIDForActivity(params);
+        objOrder.setCustomer_id(currentCustomerID);
+
+        //If this activity is opened from customer view
+        if (currentCustomerID > 0) {
+            customerIDTxt.setText(currentCustomerID + "");
+            customerIDTxt.setEnabled(false);
+        }
+        //TODO:add products
+
+        addOrderBtn = (Button) findViewById(R.id.addOrderBtn);
         closeButton = (Button) findViewById(R.id.btnCclOrd);
         backButton = (Button) findViewById(R.id.btnBckOrd);
         clearButton = (Button) findViewById(R.id.buttonClearOrder);
 
-        final TextView orderId = (TextView) findViewById(R.id.orderID);
-        final EditText custIDOrder = (EditText) findViewById(R.id.custIDOrd);
         orderId.setText(Integer.toString(MainActivity.currentOrderID));
 
         orderDateListener = new DatePickerDialog.OnDateSetListener() {
@@ -115,6 +133,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
                         //TODO: we can return also the new added order[to get its ID] to use it in the next view to add products.
                         Toast.makeText(NewOrderActivity.this, response.body(), Toast.LENGTH_LONG).show();
+                        //TODO: go to adding order products
                     }
 
                     @Override
@@ -129,7 +148,7 @@ public class NewOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent myIntent=new Intent(NewOrderActivity.this,
+                Intent myIntent = new Intent(NewOrderActivity.this,
                         MainActivity.class);
                 NewOrderActivity.this.startActivity(myIntent);
             }
@@ -138,14 +157,16 @@ public class NewOrderActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               finish();
+                finish();
             }
         });
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 orderId.setText(Integer.toString(MainActivity.currentOrderID));
-                custIDOrder.setText("");
+                if (!customerIDTxt.isEnabled()) {
+                    customerIDTxt.setText("");
+                }
             }
         });
 

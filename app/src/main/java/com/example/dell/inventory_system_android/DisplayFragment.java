@@ -1,17 +1,24 @@
 package com.example.dell.inventory_system_android;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Models.Customer;
+import com.example.dell.inventory_system_android.Models.Parent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -19,10 +26,13 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class DisplayFragment extends Fragment {
-    List<String> customersString;
-    List<String> ordersString;
-    List<String> productsString;
+    List<String> stringList = new ArrayList<String>(Arrays.asList(new String[]{"asdaasdaw"}));
+    //    List<String> ordersString;
+//    List<String> productsString;
     ArrayAdapter<String> adapter;
+    List<Parent> listing;
+    Class showActivity;
+    ListView lv;
 
 
     public DisplayFragment() {
@@ -34,43 +44,63 @@ public class DisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_display, container, false);
-        customersString = new ArrayList<String>();
-        ordersString = new ArrayList<String>();
-        productsString = new ArrayList<String>();
-        for (int i = 0; i < Customer.getCustomersList().size(); i++)
-            customersString.add(Customer.getCustomersList().get(i).toString());
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, customersString);
+//        customersString = new ArrayList<String>();
+//        ordersString = new ArrayList<String>();
+//        productsString = new ArrayList<String>();
+//        for (int i = 0; i < Customer.getCustomersList().size(); i++)
+//            customersString.add(Customer.getCustomersList().get(i).toString());
+//        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, customersString);
         // Inflate the layout for this fragment
-        ListView lv = (ListView) rootView.findViewById(R.id.listViewFragment);
+        lv = (ListView) rootView.findViewById(R.id.listViewFragment);
+        adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, stringList);
+        Log.w("%%%%%%%%%555", "before:");
         lv.setAdapter(adapter);
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent intent = new Intent(getActivity(),
+                        showActivity);
+                Bundle b = new Bundle();
+                b.putInt("ID", listing.get(i).getId()); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            }
+        });
         return rootView;
     }
+
 
     public interface Communicator {
         public void respond(int position);
     }
 
-    public void changeData(int position) {
-        if (position == R.id.nav_customer_display) {
-            customersString.add("Customers");
-            customersString.add("are being");
-            customersString.add("displayed");
-            adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, customersString);
-            adapter.notifyDataSetChanged();
-        }
-        /*else if(position == R.id.nav_order_display){
-            ordersString.add("Orders");
-            ordersString.add("Displayed");
-            adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,ordersString);
-            adapter.notifyDataSetChanged();
-        }
-        else if (position == R.id.nav_product_display){
-            productsString.add("Products");
-            productsString.add("Displayed");
-            adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,productsString);
-            adapter.notifyDataSetChanged();
 
-        }*/
+    public void fillList(List<Parent> list) {
+        Log.w("FRAGMENT", "FillingList");
+        if (list == null) {
+            Toast.makeText(this.getActivity(), "ERROR: unable to fetch data", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        this.listing = list;
+        stringList.clear();
+        for (Parent item : list) {
+            stringList.add(item.listDisplay());
+            Log.w("ListData",item.listDisplay());
+        }
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
+    public void setShowActivity(Class activity) {
+        this.showActivity = activity;
     }
 
 }

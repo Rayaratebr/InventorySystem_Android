@@ -14,7 +14,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         setRetrofitConfig();
-        Log.w("%%%%once","yess");
+//        Log.w("%%%%once","yess");
     }
 
 

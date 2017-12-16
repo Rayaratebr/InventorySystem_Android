@@ -2,7 +2,7 @@ package com.example.dell.inventory_system_android.Models;
 
 import java.util.Date;
 
-public class Payment {
+public class Payment extends Parent{
     private int id;
     private double amount;
     private Date payment_date;//TODO: check date type
@@ -40,5 +40,10 @@ public class Payment {
 
     public void setCustomer_id(long customer_id) {
         this.customer_id = customer_id;
+    }
+
+    public String listDisplay() {
+
+        return "Amount: " + amount + ", Customer: " + customer_id + ", PaymentDate: "+payment_date;
     }
 }

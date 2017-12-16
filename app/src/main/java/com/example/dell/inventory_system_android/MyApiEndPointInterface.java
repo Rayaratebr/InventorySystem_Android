@@ -14,7 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-interface MyApiEndPointInterface {
+public interface MyApiEndPointInterface {
 
      /*
     *
@@ -23,6 +23,9 @@ interface MyApiEndPointInterface {
 
     @GET("customers")
     Call<List<Customer>> getAllCustomers();
+
+    @GET("customers/{customer_id}")
+    Call<Customer> getCustomer(@Path("customer_id") int customer_id);
 
     @POST("customers")
     Call<String> storeCustomer(@Body Customer customer);
@@ -33,7 +36,10 @@ interface MyApiEndPointInterface {
     * */
 
     @GET("payments")
-    Call<List<Customer>> getAllPayments();
+    Call<List<Payment>> getAllPayments();
+
+    @GET("payments/{payment_id}")
+    Call<Payment> getPayment(@Path("payment_id") int payment_id);
 
     @POST("payments")
     Call<String> storePayment(@Body Payment payment);
@@ -49,6 +55,9 @@ interface MyApiEndPointInterface {
     @GET("products")
     Call<List<Product>> getAllProducts();
 
+    @GET("products/{product_id}")
+    Call<Product> getProduct(@Path("product_id") int product_id);
+
     @POST("products")
     Call<String> storeProduct(@Body Product product);
 
@@ -58,6 +67,9 @@ interface MyApiEndPointInterface {
       * */
     @GET("orders")
     Call<List<Order>> getAllOrders();
+
+    @GET("orders/{order_id}")
+    Call<Order> getOrder(@Path("order_id") int order_id);
 
     @POST("orders")
     Call<String> storeOrder(@Body Order order);

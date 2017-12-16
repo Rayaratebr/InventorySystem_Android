@@ -3,7 +3,7 @@ package com.example.dell.inventory_system_android.Models;
 import java.util.ArrayList;
 
 
-public class Order {
+public class Order extends Parent {
     private long id;
     private String order_date;
     private String order_due_date;
@@ -44,7 +44,6 @@ public class Order {
     }
 
 
-
 //    public ArrayList<Product> getProducts() {
 //        return products;
 //    }
@@ -62,6 +61,11 @@ public class Order {
                 ", customer=" + customer_id +
 //                ", products=" + products +
                 '}';
+    }
+
+    public String listDisplay() {
+
+        return "Order Date: " + order_date + ", Customer: " + customer_id;
     }
 
 

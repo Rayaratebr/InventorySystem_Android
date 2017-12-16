@@ -1,7 +1,7 @@
 package com.example.dell.inventory_system_android.Models;
 
 
-public class Product {
+public class Product extends Parent{
 
     private int id;
     private double standard_price;
@@ -48,5 +48,10 @@ public class Product {
                 ", quantity=" + quantity +
                 ", unit='" + unit + '\'' +
                 '}';
+    }
+
+    public String listDisplay() {
+
+        return "Standard Price: " + standard_price + ", Quantity: " + quantity + ", unit: "+unit;
     }
 }
