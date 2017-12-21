@@ -14,23 +14,18 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.MenuItem;
 import android.widget.EditText;
-import com.example.dell.inventory_system_android.CustomerActivities.*;
-import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
-import com.example.dell.inventory_system_android.ProductActivities.NewProductActivity;
 
-import static com.example.dell.inventory_system_android.Helpers.showActivity;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle aToggle;
     AlertDialog.Builder builder;
     int deletedID;
     Intent myIntent;
-    DisplayFragment displayFragment;
+   /* DisplayFragment displayFragment;
     FragmentManager fragmentManager = getFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();*/
 
-    public static int currentCustID = 0, currentOrderID = 0, currentProductID = 0;
+    static int currentCustID = 0 , currentOrderID = 0,currentProductID = 0;
    /* public static int getCurrentCustID() {
         return currentCustID;
     }
@@ -45,8 +40,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_main);
 
+     //   displayFragment = new DisplayFragment();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        aToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        aToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open,R.string.close);
 
         drawerLayout.addDrawerListener(aToggle);
         aToggle.syncState();
@@ -57,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (mNavigationView != null) {
             mNavigationView.setNavigationItemSelectedListener(this);
-            mNavigationView.bringToFront();
         }
 
         builder = new AlertDialog.Builder(this);
@@ -84,17 +79,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 dialog.cancel();
             }
         });
-        displayFragment = new DisplayFragment();
-        fragmentTransaction.add(R.id.fragmentLayout, displayFragment, "FDisplay");
-        fragmentTransaction.commit();
+
+
 
     }
 
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (aToggle.onOptionsItemSelected(item)) {
+        if (aToggle.onOptionsItemSelected(item)){
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -104,99 +98,70 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if (isDisplayItem(id)) {
-//            displayInFragment(id);
-            connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this);
-            asyncTask.execute(id);
-            displayFragment.setShowActivity(showActivity.get(id));
-        }
-
-        if (id == R.id.nav_customer_add) {
+        if (id == R.id.nav_customer_add){
             //hide the activity
             //finish();
             //Start the New Customer Activity
-            Intent myIntent = new Intent(MainActivity.this,
+            Intent myIntent=new Intent(MainActivity.this,
                     NewCustomerActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
-        if (id == R.id.nav_customer_delete) {
+        if (id == R.id.nav_customer_display){
+          /*  fragmentTransaction.add(R.id.linearLayout,displayFragment,"FA");
+            getFragmentManager().beginTransaction().add(R.id.drawer_layout,displayFragment,"FA").commit();
+            fragmentTransaction.commit();
+            if (displayFragment.isAdded()){
+                builder.show();
+                displayFragment.changeData(R.id.nav_customer_display);
+            }*/
+
+        }
+        if (id == R.id.nav_customer_delete){
             builder.show();
             //TODO send the id to delete a customer
             //deleteCustomer(id);
         }
-        if (id == R.id.nav_order_delete) {
+        if (id == R.id.nav_order_delete){
             builder.show();
             //TODO send the id to delete an order
             //deleteOrder(id);
         }
-        if (id == R.id.nav_product_delete) {
+        if (id == R.id.nav_product_delete){
             builder.show();
             //TODO send the id to delete a product
             //deleteProduct(id);
         }
 
-        if (id == R.id.nav_customer_order) {
+        if (id == R.id.nav_customer_order){
             //hide the activity
             //finish();
             //Start the New Customer Activity
-            myIntent = new Intent(MainActivity.this,
+            myIntent=new Intent(MainActivity.this,
                     NewOrderActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
-        if (id == R.id.nav_order_add) {
+        if (id == R.id.nav_order_add){
             //hide the activity
             //finish();
             //Start the New Customer Activity
-            myIntent = new Intent(MainActivity.this,
+            myIntent=new Intent(MainActivity.this,
                     NewOrderActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
-        if (id == R.id.nav_product_add) {
-            myIntent = new Intent(MainActivity.this, NewProductActivity.class);
+        if (id == R.id.nav_product_add){
+            myIntent = new Intent(MainActivity.this,NewProductActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
 
-        if (id == R.id.nav_close) {
+        if (id == R.id.nav_close){
             finish();
         }
-        drawerLayout.closeDrawers();
 
-        return true;
+
+
+
+        return false;
     }
-
-
-//    private void displayInFragment(int menuItemId) {
-//
-//        if (displayFragment.isAdded()) {
-//            List<Parent> displayList = null;
-//
-//            switch (menuItemId) {
-//                case R.id.nav_customer_display:
-//                    displayList = Helpers.getCustomersList(this);
-//                    break;
-//
-//                case R.id.nav_order_display:
-//                    displayList = Helpers.getOrdersList(this);
-//                    break;
-//
-//                case R.id.nav_product_display:
-//                    displayList = Helpers.getProductsList(this);
-//
-//                    break;
-//
-//            }
-//
-////            while (displayList == null) ;//TODO: async
-//            displayFragment.fillList(displayList);
-//
-//        }
-//
-//    }
-
-    private boolean isDisplayItem(int id) {
-        return id == R.id.nav_customer_display || id == R.id.nav_order_display || id == R.id.nav_product_display;
-    }
-
 
 
 
