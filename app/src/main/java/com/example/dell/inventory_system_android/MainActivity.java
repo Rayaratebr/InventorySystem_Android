@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setContentView(R.layout.activity_main);
 
+        displayFragment = (DisplayFragment) getFragmentManager().findFragmentById(R.id.displayFragment);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         aToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
@@ -84,9 +85,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 dialog.cancel();
             }
         });
-        displayFragment = new DisplayFragment();
-        fragmentTransaction.add(R.id.fragmentLayout, displayFragment, "FDisplay");
-        fragmentTransaction.commit();
 
     }
 
@@ -106,9 +104,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (isDisplayItem(id)) {
 //            displayInFragment(id);
-            connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this);
-            asyncTask.execute(id);
-            displayFragment.setShowActivity(showActivity.get(id));
+            int showType = Helpers.menuShowItemsType.get(id);
+            connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this,displayFragment);
+            asyncTask.execute(showType);
+            displayFragment.setShowActivity(showActivity.get(showType));
         }
 
         if (id == R.id.nav_customer_add) {

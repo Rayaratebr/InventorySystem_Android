@@ -1,7 +1,6 @@
 package com.example.dell.inventory_system_android.CustomerActivities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 
 import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.ListingActivity;
-import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Customer;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.ObjectViewAsyncTask;
@@ -19,9 +17,9 @@ import com.example.dell.inventory_system_android.ViewActivity;
 
 public class ViewCustomerActivity extends ViewActivity{
 
-    int currentCustomerID = -1;
+//    int currentCustomerID = -1;
     Customer customer;
-    TextView customerDetails;
+    TextView customerDetailsLbl;
 
     Button addOrderBtn,addPaymentBtn,viewOrdersBtn,viewPaymentsBtn;
 
@@ -34,21 +32,21 @@ public class ViewCustomerActivity extends ViewActivity{
         addPaymentBtn = (Button) findViewById(R.id.addPaymentBtn);
         viewOrdersBtn = (Button) findViewById(R.id.viewOrdersBtn);
         viewPaymentsBtn = (Button) findViewById(R.id.viewPaymentsBtn);
+        customerDetailsLbl = (TextView) findViewById(R.id.textViewCustDtls);
 
-        params = getIntent().getExtras();
-        currentCustomerID = Helpers.getIDForActivity(params);
-        customerDetails = (TextView) findViewById(R.id.textViewCustDtls);
+//        params = getIntent().getExtras();
+//        currentCustomerID = Helpers.getIDForActivity(params);
+
         ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewCustomerActivity.this);
-        asyncTask.execute(currentCustomerID,Helpers.CUSTOMER);
+        asyncTask.execute(objectID,Helpers.CUSTOMER);
 
         addOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(ViewCustomerActivity.this,
                         NewOrderActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("ID",currentCustomerID); //Your id
-                myIntent.putExtras(b); //Put your id to your next Intent
+                NewOrderActivity.currentCustomerID = objectID;
+
                 ViewCustomerActivity.this.startActivity(myIntent);
             }
         });
@@ -57,9 +55,11 @@ public class ViewCustomerActivity extends ViewActivity{
             public void onClick(View view) {
                 Intent myIntent = new Intent(ViewCustomerActivity.this,
                         ListingActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("ID",currentCustomerID); //Your id
-                myIntent.putExtras(b); //Put your id to your next Intent
+//                Bundle b = new Bundle();
+//                b.putInt("ID",objectID); //Your id
+//                myIntent.putExtras(b); //Put your id to your next Intent
+                ListingActivity.showType = Helpers.CUSTOMER_ORDERS;
+                ListingActivity.ID = objectID;
                 ViewCustomerActivity.this.startActivity(myIntent);
             }
         });
@@ -70,7 +70,7 @@ public class ViewCustomerActivity extends ViewActivity{
     public void setObject(Parent object){
 
         this.customer = (Customer)object;
-        customerDetails.setText(customer.toString());//TODO: make it prettier
+        customerDetailsLbl.setText(customer.toString());//TODO: make it prettier
     }
 
 

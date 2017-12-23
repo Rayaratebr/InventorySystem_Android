@@ -31,8 +31,7 @@ public class NewOrderActivity extends AppCompatActivity {
     Button addOrderBtn, closeButton, backButton, clearButton;
     Calendar myCalendar;
     Order objOrder;
-    int currentCustomerID;
-    Bundle params;
+    public static int currentCustomerID;
     DatePickerDialog.OnDateSetListener orderDateListener, orderDueDateListener;
 
 
@@ -50,8 +49,6 @@ public class NewOrderActivity extends AppCompatActivity {
 
 
         objOrder = new Order();
-        params = getIntent().getExtras();
-        currentCustomerID = Helpers.getIDForActivity(params);
         objOrder.setCustomer_id(currentCustomerID);
 
         //If this activity is opened from customer view
