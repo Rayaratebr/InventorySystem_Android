@@ -26,9 +26,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class DisplayFragment extends Fragment {
+
     List<String> stringList = new ArrayList<String>(Arrays.asList(new String[]{"asdaasdaw"}));
-    //    List<String> ordersString;
-//    List<String> productsString;
     ArrayAdapter<String> adapter;
     List<Parent> listing;
     Class showActivity;
@@ -37,6 +36,7 @@ public class DisplayFragment extends Fragment {
 
     public DisplayFragment() {
         // Required empty public constructor
+        super();
     }
 
 
@@ -44,12 +44,6 @@ public class DisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_display, container, false);
-//        customersString = new ArrayList<String>();
-//        ordersString = new ArrayList<String>();
-//        productsString = new ArrayList<String>();
-//        for (int i = 0; i < Customer.getCustomersList().size(); i++)
-//            customersString.add(Customer.getCustomersList().get(i).toString());
-//        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, customersString);
         // Inflate the layout for this fragment
         lv = (ListView) rootView.findViewById(R.id.listViewFragment);
         adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, stringList);
@@ -63,9 +57,10 @@ public class DisplayFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(),
                         showActivity);
-                Bundle b = new Bundle();
-                b.putInt("ID", listing.get(i).getId()); //Your id
-                intent.putExtras(b); //Put your id to your next Intent
+                ViewActivity.objectID = listing.get(i).getId();
+//                Bundle b = new Bundle();
+//                b.putInt("ID", listing.get(i).getId()); //Your id
+//                intent.putExtras(b); //Put your id to your next Intent
 
                 getActivity().startActivity(intent);
                 getActivity().finish();

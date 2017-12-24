@@ -24,17 +24,28 @@ import retrofit2.Call;
 
 public class Helpers {
 
-    public static final Map<Integer, Class> showActivity = new HashMap<Integer, Class>() {
-        {
-            put(R.id.nav_customer_display, ViewCustomerActivity.class);
-            put(R.id.nav_order_display, NewOrderActivity.class);
-            put(R.id.nav_product_display, NewProductActivity.class);
-        }
-    };
     public static final int CUSTOMER = 0;
     public static final int PRODUCT = 1;
     public static final int PAYMENT = 2;
     public static final int ORDER = 3;
+
+    public static final int CUSTOMER_ORDERS = 4;
+
+    public static final Map<Integer, Class> showActivity = new HashMap<Integer, Class>() {
+        {
+            put(CUSTOMER, ViewCustomerActivity.class);
+            put(ORDER, NewOrderActivity.class);
+            put(PRODUCT, NewProductActivity.class);
+
+        }
+    };
+    public static final Map<Integer, Integer> menuShowItemsType = new HashMap<Integer, Integer>() {
+        {
+            put(R.id.nav_customer_display, CUSTOMER);
+            put(R.id.nav_order_display,ORDER );
+            put(R.id.nav_product_display,PRODUCT );
+        }
+    };
 
 
     public static List<Parent> getCustomersList(Activity activity) {
@@ -59,6 +70,20 @@ public class Helpers {
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(activity, "ERROR: Can't fetch Orders", Toast.LENGTH_LONG).show();
+            returnToMainActivity(activity);
+
+            return null;
+        }
+    }
+
+    public static List<Parent> getCustomerOrdersList(Activity activity, int customerID) {
+        Call<List<Order>> repos = Config.apiService.getCustomerOrders(customerID);
+        try {
+            return (List<Parent>) (Object) repos.execute().body();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(activity, "ERROR: Can't fetch Customer Orders", Toast.LENGTH_LONG).show();
             returnToMainActivity(activity);
 
             return null;

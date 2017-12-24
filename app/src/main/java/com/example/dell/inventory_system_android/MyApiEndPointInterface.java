@@ -77,4 +77,7 @@ public interface MyApiEndPointInterface {
     @POST("customers/{customer_id}/orders")
     Call<String> storeCustomerOrder(@Path("customer_id") int customer_id, @Body Order order);
 
+    @GET("customers/{customer_id}/orders")
+    Call<List<Order>> getCustomerOrders(@Path("customer_id") int customer_id);
+
 }
