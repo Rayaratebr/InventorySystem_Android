@@ -113,6 +113,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             asyncTask.execute(showType);
             displayFragment.setShowActivity(showActivity.get(showType));
         }
+       /* if (isSearchItem(id)){
+            int searchType = Helpers.menuShowItemsType.get(id);
+          //  connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this,SearchActivity);
+          //  asyncTask.execute(searchType);
+        }*/
 
         if (id == R.id.nav_customer_add) {
             //hide the activity
@@ -199,6 +204,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean isDisplayItem(int id) {
         return id == R.id.nav_customer_display || id == R.id.nav_order_display || id == R.id.nav_product_display;
     }
+
+  /*  private boolean isSearchItem(int id){
+        return id == R.id.nav_customer_search || id == R.id.nav_order_search || id == R.id.nav_product_search;
+    }*/
 
 
 

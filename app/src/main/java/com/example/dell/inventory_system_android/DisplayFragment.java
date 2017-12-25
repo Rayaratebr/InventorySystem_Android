@@ -1,6 +1,7 @@
 package com.example.dell.inventory_system_android;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -12,11 +13,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Models.Customer;
 import com.example.dell.inventory_system_android.Models.Parent;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +35,8 @@ public class DisplayFragment extends Fragment {
     List<Parent> listing;
     Class showActivity;
     ListView lv;
-
+    SearchView searchView;
+    Context context;
 
     public DisplayFragment() {
         // Required empty public constructor
@@ -47,8 +51,14 @@ public class DisplayFragment extends Fragment {
         // Inflate the layout for this fragment
         lv = (ListView) rootView.findViewById(R.id.listViewFragment);
         adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, stringList);
-        Log.w("%%%%%%%%%555", "before:");
+        searchView = (SearchView) rootView.findViewById(R.id.search);
+        context = rootView.getContext();
+        //searchView.setOnQueryTextListener();
+        lv.setTextFilterEnabled(true);
         lv.setAdapter(adapter);
+        setupSearchView();
+        Log.w("%%%%%%%%%555", "before:");
+
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,6 +77,28 @@ public class DisplayFragment extends Fragment {
             }
         });
         return rootView;
+    }
+
+   private void setupSearchView() {
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                ArrayList<String> searchresults = PerformSearch(s);
+                ArrayAdapter<String> newadapter = new
+                        ArrayAdapter<String>(context,android.R.layout.simple_list_item_1 ,searchresults);
+                lv.setAdapter(newadapter);
+                lv.invalidateViews();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint("Search Here");
     }
 
 
@@ -96,6 +128,19 @@ public class DisplayFragment extends Fragment {
 
     public void setShowActivity(Class activity) {
         this.showActivity = activity;
+    }
+
+    private ArrayList<String> PerformSearch (String para1){
+        ArrayList<String> results = new ArrayList<String>();
+        int index = 0;
+
+        for (String str:stringList){
+            if(str.contains(para1)){
+                results.add(str);
+            }
+            index++;
+        }
+        return results;
     }
 
 }
