@@ -1,6 +1,9 @@
 package com.example.dell.inventory_system_android.OrderActivities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +16,9 @@ import android.widget.Toast;
 
 
 import com.example.dell.inventory_system_android.Config;
-import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Order;
+import com.example.dell.inventory_system_android.PaymentActivities.NewPaymentActivity;
 import com.example.dell.inventory_system_android.R;
 
 import java.text.SimpleDateFormat;
@@ -28,11 +31,13 @@ import retrofit2.Response;
 
 public class NewOrderActivity extends AppCompatActivity {
     EditText orderDateTxt, orderDueDateTxt, customerIDTxt;
-    Button addOrderBtn, closeButton, backButton, clearButton;
+    Button addOrderBtn, closeButton, backButton, clearButton,assignPayment,listProducts;
+    TextView orderId;
     Calendar myCalendar;
     Order objOrder;
     public static int currentCustomerID;
     DatePickerDialog.OnDateSetListener orderDateListener, orderDueDateListener;
+    AlertDialog.Builder dlgAlert;
 
 
     @Override
@@ -40,11 +45,15 @@ public class NewOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
 
+        dlgAlert = new AlertDialog.Builder(this);
+
+        //productsFragment = (ProductsFragment) getFragmentManager().findFragmentById(R.id.productsFragment);
+
 
         myCalendar = Calendar.getInstance();
         orderDateTxt = (EditText) findViewById(R.id.orderDateTxt);
         orderDueDateTxt = (EditText) findViewById(R.id.orderDueDateTxt);
-        final TextView orderId = (TextView) findViewById(R.id.orderID);
+        orderId = (TextView) findViewById(R.id.orderID);
         customerIDTxt = (EditText) findViewById(R.id.customerIDTxt);
 
 
@@ -58,12 +67,15 @@ public class NewOrderActivity extends AppCompatActivity {
         }
         //TODO:add products
 
-        addOrderBtn = (Button) findViewById(R.id.addOrderBtn);
+        addOrderBtn = (Button) findViewById(R.id.btnAddOrder);
         closeButton = (Button) findViewById(R.id.btnCclOrd);
         backButton = (Button) findViewById(R.id.btnBckOrd);
         clearButton = (Button) findViewById(R.id.buttonClearOrder);
 
-        orderId.setText(Integer.toString(MainActivity.currentOrderID));
+        assignPayment = (Button) findViewById(R.id.btnPaymentOrder);
+        listProducts = (Button) findViewById(R.id.btnSlctProducts);
+
+      //  orderId.setText(MainActivity.currentOrderID + " ");
 
         orderDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -117,28 +129,34 @@ public class NewOrderActivity extends AppCompatActivity {
             }
         });
 
+
         addOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO: check empty dates
-                //TODO SEND CUSTOMER ID AND ORDER DETAILS TO BE STORED
+                String errorMessage = "";
+                boolean valid = verifyFields(errorMessage);
+                if (valid){
+                    //TODO SEND CUSTOMER ID AND ORDER DETAILS TO BE STORED
                 /*storing the new order to database using port request*/
-                Call<String> repos = Config.apiService.storeCustomerOrder(1, objOrder);
-                repos.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    Call<String> repos = Config.apiService.storeCustomerOrder(1, objOrder);
+                    repos.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
 
-                        //TODO: we can return also the new added order[to get its ID] to use it in the next view to add products.
-                        Toast.makeText(NewOrderActivity.this, response.body(), Toast.LENGTH_LONG).show();
-                        //TODO: go to adding order products
-                    }
+                            //TODO: we can return also the new added order[to get its ID] to use it in the next view to add products.
+                            Toast.makeText(NewOrderActivity.this, response.body(), Toast.LENGTH_LONG).show();
+                            //TODO: go to adding order products
+                        }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(NewOrderActivity.this, "error", Toast.LENGTH_LONG).show();
-                    }
-                });
-                (MainActivity.currentOrderID)++;
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(NewOrderActivity.this, "error", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    (MainActivity.currentOrderID)++;
+                }
+
             }
         });
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +185,27 @@ public class NewOrderActivity extends AppCompatActivity {
             }
         });
 
+        assignPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(NewOrderActivity.this,
+                        NewPaymentActivity.class);
+                NewOrderActivity.this.startActivity(myIntent);
+            }
+        });
+        listProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(NewOrderActivity.this,
+                        ChooseProductsActivity.class);
+                NewOrderActivity.this.startActivity(myIntent);
+
+            }
+        });
+
+
+
+
     }
 
     private void updateLabel(EditText editText) {
@@ -185,6 +224,29 @@ public class NewOrderActivity extends AppCompatActivity {
         SimpleDateFormat tf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
         return tf.format(calendar.getTime());
+    }
+
+    boolean verifyFields (String errorMessage){
+        if (objOrder.getProducts().isEmpty()){
+            errorMessage += "You must select at least one product\n";
+            return false;
+        }
+        if (objOrder.getOrderDate().isEmpty()){
+            errorMessage += "Order date can't be left blank!\n";
+            return false;
+        }
+        if (objOrder.getOrderDueDate().isEmpty()){
+            errorMessage += "Order due date can't be left blank!\n";
+            return false;
+        }
+        if (!errorMessage.equals("")) {
+            dlgAlert.setMessage(errorMessage);
+            dlgAlert.setTitle("Error Message");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+        }
+        return true;
     }
 
 }

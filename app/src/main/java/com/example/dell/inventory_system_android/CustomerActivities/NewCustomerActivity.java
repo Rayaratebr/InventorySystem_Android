@@ -27,6 +27,7 @@ public class NewCustomerActivity extends AppCompatActivity {
         int currentCustomerID = 0;
     Customer customer;
     Bundle params;
+    AlertDialog.Builder dlgAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +37,10 @@ public class NewCustomerActivity extends AppCompatActivity {
         currentCustomerID = Helpers.getIDForActivity(params);
         Log.w("PARAMS:", Helpers.getIDForActivity(params) + "");
 
-        final AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-        final AlertDialog.Builder dlgAlert2 = new AlertDialog.Builder(this);
+        dlgAlert = new AlertDialog.Builder(this);
 
         Button btnAddCust = (Button) findViewById(R.id.btnAddCust);
-        Button btnCancelCust = (Button) findViewById(R.id.addOrderBtn);
+        Button btnCancelCust = (Button) findViewById(R.id.btnAddOrder);
         Button btnClear = (Button) findViewById(R.id.btnClr);
 
         final TextView txtCustID = (TextView) findViewById(R.id.txtCustID);
@@ -50,9 +50,7 @@ public class NewCustomerActivity extends AppCompatActivity {
         final EditText txtName = (EditText) findViewById(R.id.txtCustName);
         final EditText txtPhone = (EditText) findViewById(R.id.txtPhone);
         final EditText txtAddress = (EditText) findViewById(R.id.txtAddress);
-
-
-//        txtName.setText();
+        
         btnAddCust.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,48 +58,26 @@ public class NewCustomerActivity extends AppCompatActivity {
                 phone = txtPhone.getText().toString();
                 address = txtAddress.getText().toString();
                 String errorMessage = "";
+                boolean valid =verifyFields(name,phone,address,errorMessage);
 
-
-                if (name.matches("\\w+\\d+.*")) {
-                    errorMessage += "Customer name can't contain numbers!\n";
-                }
-
-                if (name.isEmpty()) {
-                    errorMessage += "Name field can't be left blank!\n";
-                }
-
-                if (txtPhone.toString().equals("")) {
-                    errorMessage += "Phone field can't be left blank!\n";
-                }
-                if (address.isEmpty()) {
-                    errorMessage += "Address field can't be left blank!";
-                }
-
-                if (!errorMessage.equals("")) {
-                    dlgAlert.setMessage(errorMessage);
-                    dlgAlert.setTitle("Error Message");
-                    dlgAlert.setPositiveButton("OK", null);
-                    dlgAlert.setCancelable(true);
-                    dlgAlert.create().show();
-                    return;
-                }
-                customer = new Customer(name,address,phone);
-
-                //TODO IF EVERYTHING IS FINE ADD THE CUSTOMER AND INCREMENT THE ID
+                if (valid){
+                    customer = new Customer(name,address,phone);
+                    //TODO IF EVERYTHING IS FINE ADD THE CUSTOMER AND INCREMENT THE ID
                 /*storing the new customer to database using port request*/
-                Call<String> repos = Config.apiService.storeCustomer(customer);
-                repos.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Toast.makeText(NewCustomerActivity.this, response.body(), Toast.LENGTH_LONG).show();
-                    }
+                    Call<String> repos = Config.apiService.storeCustomer(customer);
+                    repos.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Toast.makeText(NewCustomerActivity.this, response.body(), Toast.LENGTH_LONG).show();
+                        }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(NewCustomerActivity.this, "error", Toast.LENGTH_LONG).show();
-                    }
-                });
-//                (MainActivity.currentCustID)++;
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(NewCustomerActivity.this, "error", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
             }
         });
 
@@ -130,6 +106,36 @@ public class NewCustomerActivity extends AppCompatActivity {
         });
 
 
+    }
+    boolean verifyFields (String name, String phone, String address,String errorMessage){
+
+        if (name.matches(".*\\d+.*")) {
+            errorMessage += "Customer name can't contain numbers!\n";
+            return false;
+        }
+
+        if (name.isEmpty()) {
+            errorMessage += "Name field can't be left blank!\n";
+            return false;
+        }
+
+        if (phone.equals("")) {
+            errorMessage += "Phone field can't be left blank!\n";
+            return false;
+        }
+        if (address.isEmpty()) {
+            errorMessage += "Address field can't be left blank!";
+            return false;
+        }
+
+        if (!errorMessage.equals("")) {
+            dlgAlert.setMessage(errorMessage);
+            dlgAlert.setTitle("Error Message");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+        }
+        return true;
     }
 
 

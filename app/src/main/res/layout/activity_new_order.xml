@@ -37,12 +37,11 @@
         android:layout_alignEnd="@+id/customerIDTxt" />
 
     <Button
-        android:id="@+id/addOrderBtn"
+        android:id="@+id/btnAddOrder"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Add Order"
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/orderDueDateTxt"
+        android:layout_above="@+id/btnCclOrd"
         android:layout_alignLeft="@+id/textView10"
         android:layout_alignStart="@+id/textView10" />
 
@@ -93,9 +92,10 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:layout_below="@+id/addOrderBtn"
-        android:layout_alignLeft="@+id/addOrderBtn"
-        android:layout_alignStart="@+id/addOrderBtn" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btnAddOrder"
+        android:layout_alignStart="@+id/btnAddOrder"
+        android:layout_marginBottom="42dp" />
 
     <TextView
         android:id="@+id/txtViewOrdID"
@@ -133,9 +133,33 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Clear"
-        android:layout_alignBaseline="@+id/addOrderBtn"
-        android:layout_alignBottom="@+id/addOrderBtn"
-        android:layout_toRightOf="@+id/addOrderBtn"
-        android:layout_toEndOf="@+id/addOrderBtn" />
+        android:layout_alignBaseline="@+id/btnAddOrder"
+        android:layout_alignBottom="@+id/btnAddOrder"
+        android:layout_toRightOf="@+id/btnAddOrder"
+        android:layout_toEndOf="@+id/btnAddOrder" />
+
+    <Button
+        android:id="@+id/btnSlctProducts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select products"
+        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/buttonClearOrder"
+        android:layout_alignLeft="@+id/btnAddOrder"
+        android:layout_alignStart="@+id/btnAddOrder"
+        android:layout_toLeftOf="@+id/buttonClearOrder"
+        android:layout_toStartOf="@+id/buttonClearOrder" />
+
+    <Button
+        android:id="@+id/btnPaymentOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/buttonClearOrder"
+        android:layout_alignRight="@+id/buttonClearOrder"
+        android:layout_alignTop="@+id/btnSlctProducts"
+        android:layout_toEndOf="@+id/btnSlctProducts"
+        android:layout_toRightOf="@+id/btnSlctProducts"
+        android:text="Assign Payment" />
+
 </android.widget.RelativeLayout>
 

@@ -33,7 +33,7 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/addOrderBtn"
+                android:id="@+id/btnAddOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Order" />

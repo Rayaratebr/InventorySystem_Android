@@ -8,7 +8,7 @@ public class Order extends Parent {
     private String order_date;
     private String order_due_date;
     private long customer_id;
-//    private ArrayList<Product> products;
+    private ArrayList<Product> products;
 
 
     public Order() {
@@ -44,13 +44,13 @@ public class Order extends Parent {
     }
 
 
-//    public ArrayList<Product> getProducts() {
-//        return products;
-//    }
+  public ArrayList<Product> getProducts() {
+       return products;
+   }
 //
-//    public void setProducts(ArrayList<Product> products) {
-//        this.products = products;
-//    }
+   public void setProducts(ArrayList<Product> products) {
+      this.products = products;
+   }
 
     @Override
     public String toString() {

@@ -78,13 +78,13 @@
         android:layout_marginTop="65dp"
         android:text="Add Customer"
         android:layout_below="@+id/textView7"
-        android:layout_alignRight="@+id/addOrderBtn"
-        android:layout_alignEnd="@+id/addOrderBtn"
+        android:layout_alignRight="@+id/btnAddOrder"
+        android:layout_alignEnd="@+id/btnAddOrder"
         android:layout_alignLeft="@+id/textView7"
         android:layout_alignStart="@+id/textView7" />
 
     <Button
-        android:id="@+id/addOrderBtn"
+        android:id="@+id/btnAddOrder"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Cancel"
@@ -121,10 +121,10 @@
         android:id="@+id/btnClr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/addOrderBtn"
+        android:layout_alignBottom="@+id/btnAddOrder"
         android:layout_alignLeft="@+id/btnAddCust"
         android:layout_alignStart="@+id/btnAddCust"
-        android:layout_toLeftOf="@+id/addOrderBtn"
+        android:layout_toLeftOf="@+id/btnAddOrder"
         android:text="Clear" />
 
 </android.widget.RelativeLayout>

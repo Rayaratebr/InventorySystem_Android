@@ -28,7 +28,7 @@ public class ViewCustomerActivity extends ViewActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_customer);
 
-        addOrderBtn = (Button) findViewById(R.id.addOrderBtn);
+        addOrderBtn = (Button) findViewById(R.id.btnAddOrder);
         addPaymentBtn = (Button) findViewById(R.id.addPaymentBtn);
         viewOrdersBtn = (Button) findViewById(R.id.viewOrdersBtn);
         viewPaymentsBtn = (Button) findViewById(R.id.viewPaymentsBtn);
