@@ -88,11 +88,11 @@
         android:id="@+id/amountPayment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ems="10"
         android:layout_alignBaseline="@+id/textView16"
         android:layout_alignBottom="@+id/textView16"
         android:layout_alignLeft="@+id/paymentDate"
-        android:layout_alignStart="@+id/paymentDate"
-        android:ems="10" />
+        android:layout_alignStart="@+id/paymentDate" />
 
     <Button
         android:id="@+id/btnAddPayment"

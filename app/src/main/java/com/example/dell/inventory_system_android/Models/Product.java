@@ -8,6 +8,11 @@ public class Product extends Parent{
     private int quantity;
     private String unit;//TODO: check what is it
 
+    public Product(int id, int quantity){
+        this.id=id;
+        this.quantity=quantity;
+    }
+
     public int getId() {
         return id;
     }

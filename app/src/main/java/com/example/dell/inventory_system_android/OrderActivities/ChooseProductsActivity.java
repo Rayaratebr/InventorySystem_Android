@@ -3,6 +3,7 @@ package com.example.dell.inventory_system_android.OrderActivities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -15,7 +16,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.dell.inventory_system_android.Models.Order;
 import com.example.dell.inventory_system_android.Models.Parent;
+import com.example.dell.inventory_system_android.Models.Product;
 import com.example.dell.inventory_system_android.R;
 
 import java.util.ArrayList;
@@ -25,20 +28,20 @@ import java.util.List;
 
 public class ChooseProductsActivity extends AppCompatActivity {
 
-    List<String> stringList = new ArrayList<String>(Arrays.asList(new String[]{"asdaasdaw"}));
-    ArrayAdapter<String> adapter;
-    List<Parent> listing;
+    private List<String> stringList = new ArrayList<String>(Arrays.asList(new String[]{"asdaasdaw"}));
+    private ArrayAdapter<String> adapter;
+    private List<Parent> listing;
    // Class showActivity;
-    ListView lv;
-    int quantity;
-    AlertDialog.Builder builder;
-    AlertDialog dialog;
-    List<Integer> productsQuantity;
-    final Context context = this;
+    private ListView lv;
+    private int quantity;
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
+    private ArrayList<Product> productsList;
+    private final Context context = this;
 
-    Button btnDone, btnCancel;
+    private Button btnDone, btnCancel;
 
-    HashMap<Integer, Integer> list;
+    private HashMap<Integer, Integer> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +97,13 @@ public class ChooseProductsActivity extends AppCompatActivity {
 
                 //TODO add the selected product to the order
                 builder.show();
-              /* list.put(new Integer(listing.get(i).getId()),new Integer(quantity));
-               productsQuantity=
-                        new ArrayList<Integer>(list.values());*/
+                productsList=
+                        new ArrayList<Product>();
+                productsList.add(new Product((listing.get(i).getId()),quantity));
+              // list.put(new Integer(listing.get(i).getId()),new Integer(quantity));
+                Intent myIntent = getIntent();
+                Order objOrder = (Order) myIntent.getSerializableExtra("sampleObject");
+                objOrder.setProducts(productsList);
 
             }
         });

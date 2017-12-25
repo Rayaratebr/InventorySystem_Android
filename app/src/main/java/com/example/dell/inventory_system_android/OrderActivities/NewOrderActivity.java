@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Parcelable;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,14 +32,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NewOrderActivity extends AppCompatActivity {
-    EditText orderDateTxt, orderDueDateTxt, customerIDTxt;
-    Button addOrderBtn, closeButton, backButton, clearButton,assignPayment,listProducts;
+    private EditText orderDateTxt, orderDueDateTxt, customerIDTxt;
+    private Button addOrderBtn, closeButton, backButton, clearButton,assignPayment,listProducts;
     TextView orderId;
     Calendar myCalendar;
     Order objOrder;
     public static int currentCustomerID;
     DatePickerDialog.OnDateSetListener orderDateListener, orderDueDateListener;
     AlertDialog.Builder dlgAlert;
+    Bundle bundle;
 
 
     @Override
@@ -190,6 +193,7 @@ public class NewOrderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(NewOrderActivity.this,
                         NewPaymentActivity.class);
+                myIntent.putExtra("sampleObject", objOrder);
                 NewOrderActivity.this.startActivity(myIntent);
             }
         });
@@ -198,6 +202,8 @@ public class NewOrderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(NewOrderActivity.this,
                         ChooseProductsActivity.class);
+                myIntent.putExtra("sampleObject", objOrder);
+                //myIntent.putExtra("Order", (Parcelable) objOrder);
                 NewOrderActivity.this.startActivity(myIntent);
 
             }
@@ -227,15 +233,15 @@ public class NewOrderActivity extends AppCompatActivity {
     }
 
     boolean verifyFields (String errorMessage){
-        if (objOrder.getProducts().isEmpty()){
+        if ((objOrder.getProducts()).isEmpty()){
             errorMessage += "You must select at least one product\n";
             return false;
         }
-        if (objOrder.getOrderDate().isEmpty()){
+        if ((objOrder.getOrderDate()).isEmpty()){
             errorMessage += "Order date can't be left blank!\n";
             return false;
         }
-        if (objOrder.getOrderDueDate().isEmpty()){
+        if ((objOrder.getOrderDueDate()).isEmpty()){
             errorMessage += "Order due date can't be left blank!\n";
             return false;
         }

@@ -26,6 +26,8 @@
         <activity android:name=".NewProductActivity" />
         <activity android:name=".PaymentActivities.NewPaymentActivity" />
         <activity android:name=".OrderActivities.ChooseProductsActivity"></activity>
+        <service android:name=".Service.ScheduleService" />
+        <service android:name=".Service.NotifyService" />
     </application>
 
 </manifest>

@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager = getFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+
+
+
     public static int currentCustID = 0, currentOrderID = 0, currentProductID = 0;
    /* public static int getCurrentCustID() {
         return currentCustID;
@@ -42,8 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
+
 
         displayFragment = (DisplayFragment) getFragmentManager().findFragmentById(R.id.displayFragment);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

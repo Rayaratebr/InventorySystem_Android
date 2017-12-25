@@ -1,15 +1,24 @@
 package com.example.dell.inventory_system_android.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Order extends Parent {
+public class Order extends Parent implements Serializable {
     private long id;
     private String order_date;
     private String order_due_date;
     private long customer_id;
     private ArrayList<Product> products;
+    Payment payment;
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
     public Order() {
     }
