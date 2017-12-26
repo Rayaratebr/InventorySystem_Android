@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dell.inventory_system_android.CustomerActivities.ViewCustomerActivity">
-
-
+    tools:context="com.example.dell.inventory_system_android.PaymentActivities.ViewPaymentActivity">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -16,53 +14,36 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/buttonDelete"
-                android:layout_width="35dp"
-                android:layout_height="wrap_content" />
-
             <TextView
                 android:id="@+id/CustomerDetailsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Customer Details"
+                android:text="Payment Details"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textViewCustDtls"
+                android:id="@+id/textViewPaymentDtls"
                 android:layout_width="match_parent"
                 android:layout_height="182dp"
                 android:layout_weight="1"
                 android:textAlignment="center" />
 
-            <Button
-                android:id="@+id/btnAddOrder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Order" />
 
             <Button
-                android:id="@+id/addPaymentBtn"
+                android:id="@+id/viewOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Payments" />
+                android:text="View Related Order" />
 
             <Button
-                android:id="@+id/viewOrdersBtn"
+                android:id="@+id/viewCustomer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="View Orders" />
-
-            <Button
-                android:id="@+id/viewPaymentsBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="View Payments" />
+                android:text="View Related Customer" />
 
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
-
 </android.widget.LinearLayout>

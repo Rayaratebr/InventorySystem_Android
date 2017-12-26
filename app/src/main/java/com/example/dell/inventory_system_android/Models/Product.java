@@ -13,6 +13,12 @@ public class Product extends Parent{
         this.quantity=quantity;
     }
 
+    public Product(double standard_price, int quantity, String unit) {
+        this.standard_price = standard_price;
+        this.quantity = quantity;
+        this.unit = unit;
+    }
+
     public int getId() {
         return id;
     }

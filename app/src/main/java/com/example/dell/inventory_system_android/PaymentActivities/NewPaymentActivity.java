@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.dell.inventory_system_android.Config;
 import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Order;
 import com.example.dell.inventory_system_android.Models.Payment;
@@ -20,6 +22,10 @@ import com.example.dell.inventory_system_android.ScheduleClient;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewPaymentActivity extends AppCompatActivity {
 
@@ -68,8 +74,34 @@ public class NewPaymentActivity extends AppCompatActivity {
                     Intent myIntent = getIntent();
                     Order objOrder = (Order) myIntent.getSerializableExtra("sampleObject");
                     objOrder.setPayment(payment);
+                    Double amount = Double.parseDouble(paymentAmount.getText().toString());
+                    String paymentDate = paymentDueDate.getText().toString();
+
+                    objPayment.setAmount(amount);
+                    objPayment.setPayment_date(paymentDate);
+                    //TODO IF EVERYTHING IS FINE ADD THE CUSTOMER AND INCREMENT THE ID
+                /*storing the new customer to database using port request*/
+                    Call<String> repos = Config.apiService.storePayment(objPayment);
+                    repos.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Toast.makeText(NewPaymentActivity.this, response.body(), Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(NewPaymentActivity.this, "error", Toast.LENGTH_LONG).show();
+                        }
+
+                    });
 
                 }
+            }
+        });
+        backPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
