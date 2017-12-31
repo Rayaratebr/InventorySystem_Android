@@ -48,9 +48,9 @@ public class Helpers {
     };
 
 
-    public static List<Parent> getCustomersList(Activity activity) {
+    public static List<Parent> getCustomersList(Activity activity, String name,String phone) {
         Log.w("SERVER", "GetCustomers");
-        Call<List<Customer>> repos = Config.apiService.getAllCustomers();
+        Call<List<Customer>> repos = Config.apiService.getAllCustomers(name,phone);
         try {
             return (List<Parent>) (Object) repos.execute().body();
 
@@ -90,8 +90,8 @@ public class Helpers {
         }
     }
 
-    public static List<Parent> getProductsList(Activity activity) {
-        Call<List<Product>> repos = Config.apiService.getAllProducts();
+    public static List<Parent> getProductsList(Activity activity,String unit,String price) {
+        Call<List<Product>> repos = Config.apiService.getAllProducts(unit,price);
         try {
             return (List<Parent>) (Object) repos.execute().body();
 

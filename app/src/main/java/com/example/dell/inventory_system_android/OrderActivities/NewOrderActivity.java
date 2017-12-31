@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -33,7 +34,7 @@ import retrofit2.Response;
 
 public class NewOrderActivity extends AppCompatActivity {
     private EditText orderDateTxt, orderDueDateTxt, customerIDTxt;
-    private Button addOrderBtn, closeButton, backButton, clearButton,assignPayment,listProducts;
+    private Button addOrderBtn, closeButton, backButton, clearButton, assignPayment, listProducts;
     TextView orderId;
     Calendar myCalendar;
     Order objOrder;
@@ -78,7 +79,7 @@ public class NewOrderActivity extends AppCompatActivity {
         assignPayment = (Button) findViewById(R.id.btnPaymentOrder);
         listProducts = (Button) findViewById(R.id.btnSlctProducts);
 
-      //  orderId.setText(MainActivity.currentOrderID + " ");
+        //  orderId.setText(MainActivity.currentOrderID + " ");
 
         orderDateListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -139,7 +140,7 @@ public class NewOrderActivity extends AppCompatActivity {
                 //TODO: check empty dates
                 String errorMessage = "";
                 boolean valid = verifyFields(errorMessage);
-                if (valid){
+                if (valid) {
                     //TODO SEND CUSTOMER ID AND ORDER DETAILS TO BE STORED
                 /*storing the new order to database using port request*/
                     Call<String> repos = Config.apiService.storeCustomerOrder(1, objOrder);
@@ -210,8 +211,6 @@ public class NewOrderActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
     private void updateLabel(EditText editText) {
@@ -232,18 +231,16 @@ public class NewOrderActivity extends AppCompatActivity {
         return tf.format(calendar.getTime());
     }
 
-    boolean verifyFields (String errorMessage){
-        if ((objOrder.getProducts()).isEmpty()){
+    boolean verifyFields(String errorMessage) {
+        Log.w("^^^^^^",objOrder.getProducts().size()+"");
+        if ((objOrder.getProducts()).isEmpty()) {
             errorMessage += "You must select at least one product\n";
-            return false;
         }
-        if ((objOrder.getOrderDate()).isEmpty()){
+        if (objOrder.getOrderDate() == null ) {
             errorMessage += "Order date can't be left blank!\n";
-            return false;
         }
-        if ((objOrder.getOrderDueDate()).isEmpty()){
+        if ( objOrder.getOrderDueDate()== null ) {
             errorMessage += "Order due date can't be left blank!\n";
-            return false;
         }
         if (!errorMessage.equals("")) {
             dlgAlert.setMessage(errorMessage);
@@ -251,6 +248,7 @@ public class NewOrderActivity extends AppCompatActivity {
             dlgAlert.setPositiveButton("OK", null);
             dlgAlert.setCancelable(true);
             dlgAlert.create().show();
+            return false;
         }
         return true;
     }

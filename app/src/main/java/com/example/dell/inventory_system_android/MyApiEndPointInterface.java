@@ -10,9 +10,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface MyApiEndPointInterface {
 
@@ -22,7 +24,11 @@ public interface MyApiEndPointInterface {
     * */
 
     @GET("customers")
-    Call<List<Customer>> getAllCustomers();
+    Call<List<Customer>> getAllCustomers(
+            @Query("name") String name,
+            @Query("phone") String phone
+
+            );
 
     @GET("customers/{customer_id}")
     Call<Customer> getCustomer(@Path("customer_id") int customer_id);
@@ -30,8 +36,8 @@ public interface MyApiEndPointInterface {
     @POST("customers")
     Call<String> storeCustomer(@Body Customer customer);
 
-    @POST("customers")
-    Call<Customer> deleteCustomer(@Body Customer customer);
+    @DELETE("customers/{customer_id}")
+    Call<Customer> deleteCustomer(@Path("customer_id") int customer_id);
 
     /*
     *
@@ -50,19 +56,29 @@ public interface MyApiEndPointInterface {
     @POST("customers/{customer_id}/payments")
     Call<String> storeCustomerPayment(@Path("customer_id") int customer_id, @Body Payment payment);
 
+    @DELETE("payments/{payment_id}")
+    Call<Payment> deletePayment(@Path("payment_id") int payment_id);
+
 
     /*
     *
     * Products APIs
     * */
     @GET("products")
-    Call<List<Product>> getAllProducts();
+    Call<List<Product>> getAllProducts(
+            @Query("unit") String unit,
+            @Query("price") String price
+
+    );
 
     @GET("products/{product_id}")
     Call<Product> getProduct(@Path("product_id") int product_id);
 
     @POST("products")
     Call<String> storeProduct(@Body Product product);
+
+    @DELETE("products/{product_id}")
+    Call<Product> deleteProduct(@Path("product_id") int product_id);
 
     /*
       *
@@ -82,5 +98,9 @@ public interface MyApiEndPointInterface {
 
     @GET("customers/{customer_id}/orders")
     Call<List<Order>> getCustomerOrders(@Path("customer_id") int customer_id);
+
+    @DELETE("orders/{order_id}")
+    Call<Order> deleteOrder(@Path("order_id") int order_id);
+
 
 }

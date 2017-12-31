@@ -16,7 +16,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".CustomerActivities.ViewCustomerActivity" />
         <activity android:name=".OrderActivities.NewOrderActivity" />
-        <activity android:name=".CustomerActivities.NewCustomerActivity"/>
+        <activity android:name=".CustomerActivities.NewCustomerActivity" />
         <activity
             android:name=".Splash"
             android:theme="@style/AppTheme.NoActionBar">
@@ -34,7 +34,9 @@
         <service android:name=".Service.NotifyService" />
 
         <activity android:name=".OrderActivities.ViewOrderActivity" />
-        <activity android:name=".PaymentActivities.ViewPaymentActivity"></activity>
+        <activity android:name=".PaymentActivities.ViewPaymentActivity" />
+        <activity android:name=".CustomerActivities.SearchCustomerActivity" />
+        <activity android:name=".ProductActivities.SearchProductActivity"></activity>
     </application>
 
 </manifest>

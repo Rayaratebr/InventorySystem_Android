@@ -11,10 +11,14 @@
             <item
                 android:title="Add a New Customer"
                 android:id="@+id/nav_customer_add"
-                android:icon="@drawable/addPerson"/>
+                android:icon="@drawable/addperson"/>
+
+            <item
+                android:id="@+id/nav_customer_search"
+                android:title="Search Customers" />
             <item android:title="Assign an Order to Customer"
                 android:id="@+id/nav_customer_order"
-                android:icon="@drawable/addOrder"/>
+                android:icon="@drawable/addorder"/>
 
         </menu>
         </item>
@@ -27,7 +31,7 @@
             <item
                 android:title="Add a New Order"
                 android:id="@+id/nav_order_add"
-                android:icon="@drawable/addOrder"/>
+                android:icon="@drawable/addorder"/>
             <item android:title="Edit an Order"
                 android:id="@+id/nav_order_edit"
                 android:icon="@drawable/edit"/>
