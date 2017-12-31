@@ -6,11 +6,6 @@
     tools:context="com.example.dell.inventory_system_android.DisplayFragment">
 
 
-    <SearchView
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
     <ListView
         android:id="@+id/listViewFragment"
         android:layout_width="match_parent"

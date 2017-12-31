@@ -39,7 +39,7 @@ public class connectionAsyncTask extends AsyncTask<Integer, String, List<Parent>
 
         switch (showTypeId) {
             case Helpers.CUSTOMER:
-                displayList = Helpers.getCustomersList(activity);
+                displayList = Helpers.getCustomersList(activity, null, null);
                 break;
 
             case Helpers.ORDER:
@@ -47,7 +47,7 @@ public class connectionAsyncTask extends AsyncTask<Integer, String, List<Parent>
                 break;
 
             case Helpers.PRODUCT:
-                displayList = Helpers.getProductsList(activity);
+                displayList = Helpers.getProductsList(activity,null,null);
                 break;
 
             case Helpers.CUSTOMER_ORDERS:

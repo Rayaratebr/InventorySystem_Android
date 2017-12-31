@@ -90,6 +90,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this,displayFragment);
+        asyncTask.execute(Helpers.CUSTOMER);
+        displayFragment.setShowActivity(showActivity.get(Helpers.CUSTOMER));
+
     }
 
 
@@ -125,6 +129,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //Start the New Customer Activity
             Intent myIntent = new Intent(MainActivity.this,
                     NewCustomerActivity.class);
+            MainActivity.this.startActivity(myIntent);
+        }
+
+        if(id == R.id.nav_customer_search){
+            myIntent = new Intent(MainActivity.this,
+                    SearchCustomerActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
    

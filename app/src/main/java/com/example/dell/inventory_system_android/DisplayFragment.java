@@ -35,7 +35,7 @@ public class DisplayFragment extends Fragment {
     List<Parent> listing;
     Class showActivity;
     ListView lv;
-    SearchView searchView;
+//    SearchView searchView;
     Context context;
 
     public DisplayFragment() {
@@ -51,12 +51,11 @@ public class DisplayFragment extends Fragment {
         // Inflate the layout for this fragment
         lv = (ListView) rootView.findViewById(R.id.listViewFragment);
         adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, stringList);
-        searchView = (SearchView) rootView.findViewById(R.id.search);
+//        searchView = (SearchView) rootView.findViewById(R.id.search);
         context = rootView.getContext();
-        //searchView.setOnQueryTextListener();
         lv.setTextFilterEnabled(true);
         lv.setAdapter(adapter);
-        setupSearchView();
+//        setupSearchView();
         Log.w("%%%%%%%%%555", "before:");
 
 
@@ -79,27 +78,27 @@ public class DisplayFragment extends Fragment {
         return rootView;
     }
 
-   private void setupSearchView() {
-        searchView.setIconifiedByDefault(false);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                ArrayList<String> searchresults = PerformSearch(s);
-                ArrayAdapter<String> newadapter = new
-                        ArrayAdapter<String>(context,android.R.layout.simple_list_item_1 ,searchresults);
-                lv.setAdapter(newadapter);
-                lv.invalidateViews();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setQueryHint("Search Here");
-    }
+//   private void setupSearchView() {
+//        searchView.setIconifiedByDefault(false);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                ArrayList<String> searchresults = PerformSearch(s);
+//                ArrayAdapter<String> newadapter = new
+//                        ArrayAdapter<String>(context,android.R.layout.simple_list_item_1 ,searchresults);
+//                lv.setAdapter(newadapter);
+//                lv.invalidateViews();
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                return false;
+//            }
+//        });
+//        searchView.setSubmitButtonEnabled(true);
+//        searchView.setQueryHint("Search Here");
+//    }
 
 
     public interface Communicator {
@@ -130,17 +129,17 @@ public class DisplayFragment extends Fragment {
         this.showActivity = activity;
     }
 
-    private ArrayList<String> PerformSearch (String para1){
-        ArrayList<String> results = new ArrayList<String>();
-        int index = 0;
-
-        for (String str:stringList){
-            if(str.contains(para1)){
-                results.add(str);
-            }
-            index++;
-        }
-        return results;
-    }
+//    private ArrayList<String> PerformSearch (String para1){
+//        ArrayList<String> results = new ArrayList<String>();
+//        int index = 0;
+//
+//        for (String str:stringList){
+//            if(str.contains(para1)){
+//                results.add(str);
+//            }
+//            index++;
+//        }
+//        return results;
+//    }
 
 }
