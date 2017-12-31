@@ -75,7 +75,7 @@ public class ViewCustomerActivity extends ViewActivity{
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+
             }
 
         });
