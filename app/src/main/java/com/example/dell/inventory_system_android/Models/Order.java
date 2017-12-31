@@ -9,7 +9,7 @@ public class Order extends Parent implements Serializable {
     private String order_date;
     private String order_due_date;
     private long customer_id;
-    private ArrayList<Product> products;
+    private ArrayList<Product> products = new ArrayList<Product>();
     Payment payment;
 
     public Payment getPayment() {
