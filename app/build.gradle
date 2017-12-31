@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    aaptOptions {
+        cruncherEnabled = false
+    }
 }
 
 dependencies {
@@ -35,3 +39,6 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     testCompile 'junit:junit:4.12'
 }
+
+
+

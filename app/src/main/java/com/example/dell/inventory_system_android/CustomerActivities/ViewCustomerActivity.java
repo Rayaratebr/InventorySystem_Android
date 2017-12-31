@@ -75,7 +75,19 @@ public class ViewCustomerActivity extends ViewActivity{
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Call<Customer> repos = Config.apiService.deleteCustomer(objectID);
+                repos.enqueue(new Callback<Customer>() {
+                    @Override
+                    public void onResponse(Call<Customer> call, Response<Customer> response) {
+                        Toast.makeText(ViewCustomerActivity.this, "Success", Toast.LENGTH_LONG).show();
+                    }
 
+                    @Override
+                    public void onFailure(Call<Customer> call, Throwable t) {
+                        Toast.makeText(ViewCustomerActivity.this, "Error", Toast.LENGTH_LONG).show();
+
+                    }
+                });
             }
 
         });

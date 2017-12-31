@@ -15,7 +15,8 @@
 
             <item
                 android:id="@+id/nav_customer_search"
-                android:title="Search Customers" />
+                android:title="Search Customers"
+                android:icon="@drawable/search"/>
             <item android:title="Assign an Order to Customer"
                 android:id="@+id/nav_customer_order"
                 android:icon="@drawable/addorder"/>

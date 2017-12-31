@@ -105,7 +105,7 @@
         android:layout_marginTop="40dp"
         android:layout_toLeftOf="@+id/btnCclOrd"
         android:layout_toStartOf="@+id/btnCclOrd"
-        android:text="Order #" />
+        android:text="Order " />
 
     <TextView
         android:id="@+id/orderID"

@@ -16,7 +16,7 @@
         android:layout_marginLeft="128dp"
         android:layout_marginStart="128dp"
         android:layout_marginTop="46dp"
-        android:text="Product #" />
+        android:text="Product " />
 
     <TextView
         android:id="@+id/productID"

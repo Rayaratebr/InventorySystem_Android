@@ -158,7 +158,6 @@ public class NewOrderActivity extends AppCompatActivity {
                             Toast.makeText(NewOrderActivity.this, "error", Toast.LENGTH_LONG).show();
                         }
                     });
-                    (MainActivity.currentOrderID)++;
                 }
 
             }
