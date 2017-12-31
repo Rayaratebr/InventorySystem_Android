@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.dell.inventory_system_android.Config;
 import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.ListingActivity;
+import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Customer;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.ObjectViewAsyncTask;
@@ -75,7 +76,22 @@ public class ViewCustomerActivity extends ViewActivity{
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Call<String> repos = Config.apiService.deleteCustomer(customer.getId());
+                repos.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Toast.makeText(ViewCustomerActivity.this, response.body(), Toast.LENGTH_LONG).show();
+                        Intent myIntent = new Intent(ViewCustomerActivity.this,
+                                MainActivity.class);
+                        ViewCustomerActivity.this.startActivity(myIntent);
 
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(ViewCustomerActivity.this, "error", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
         });
