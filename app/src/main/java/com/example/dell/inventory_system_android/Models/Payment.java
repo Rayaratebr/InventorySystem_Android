@@ -5,7 +5,7 @@ import java.util.Date;
 public class Payment extends Parent{
     private int id;
     private double amount;
-    private Date payment_date;//TODO: check date type
+    private String payment_date;//TODO: check date type
     private long customer_id;
 
 
@@ -26,11 +26,11 @@ public class Payment extends Parent{
         this.amount = amount;
     }
 
-    public Date getPayment_date() {
+    public String getPayment_date() {
         return payment_date;
     }
 
-    public void setPayment_date(Date payment_date) {
+    public void setPayment_date(String  payment_date) {
         this.payment_date = payment_date;
     }
 

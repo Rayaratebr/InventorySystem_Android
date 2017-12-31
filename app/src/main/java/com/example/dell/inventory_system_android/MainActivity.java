@@ -127,22 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     NewCustomerActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
-        if (id == R.id.nav_customer_delete) {
-            builder.show();
-            //TODO send the id to delete a customer
-            //deleteCustomer(id);
-        }
-        if (id == R.id.nav_order_delete) {
-            builder.show();
-            //TODO send the id to delete an order
-            //deleteOrder(id);
-        }
-        if (id == R.id.nav_product_delete) {
-            builder.show();
-            //TODO send the id to delete a product
-            //deleteProduct(id);
-        }
-
+   
         if (id == R.id.nav_customer_order) {
             //hide the activity
             //finish();

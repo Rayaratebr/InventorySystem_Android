@@ -123,7 +123,7 @@ public class ChooseProductsActivity extends AppCompatActivity {
         });
     }
 
-  /*  public void fillList(List<Parent> myList) {
+    public void fillList(List<Parent> myList) {
         Log.w("FRAGMENT", "FillingList");
         if (myList == null) {
             Toast.makeText(this, "ERROR: unable to fetch data", Toast.LENGTH_LONG).show();
@@ -140,5 +140,5 @@ public class ChooseProductsActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
 
-    }*/
+    }
 }

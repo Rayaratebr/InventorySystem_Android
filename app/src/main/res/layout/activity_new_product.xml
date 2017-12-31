@@ -52,12 +52,12 @@
         android:id="@+id/productName"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
         android:layout_alignBaseline="@+id/textView"
         android:layout_alignBottom="@+id/textView"
+        android:layout_toEndOf="@+id/textView3"
         android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
+        android:ems="10"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/productPrice"
@@ -66,11 +66,11 @@
         android:layout_alignBaseline="@+id/textView12"
         android:layout_alignBottom="@+id/textView12"
         android:layout_alignEnd="@+id/productName"
-        android:layout_alignRight="@+id/productName"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:layout_alignLeft="@+id/productName"
-        android:layout_alignStart="@+id/productName" />
+        android:layout_alignRight="@+id/productName"
+        android:layout_alignStart="@+id/productName"
+        android:ems="10"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textView13"
@@ -92,7 +92,7 @@
         android:layout_alignStart="@+id/productPrice"
         android:layout_below="@+id/productPrice"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <Button
         android:id="@+id/addProduct"

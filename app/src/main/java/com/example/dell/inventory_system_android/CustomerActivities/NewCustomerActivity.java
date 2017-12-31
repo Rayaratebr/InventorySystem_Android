@@ -111,21 +111,19 @@ public class NewCustomerActivity extends AppCompatActivity {
 
         if (name.matches(".*\\d+.*")) {
             errorMessage += "Customer name can't contain numbers!\n";
-            return false;
+
         }
 
         if (name.isEmpty()) {
             errorMessage += "Name field can't be left blank!\n";
-            return false;
         }
 
         if (phone.equals("")) {
             errorMessage += "Phone field can't be left blank!\n";
-            return false;
         }
         if (address.isEmpty()) {
             errorMessage += "Address field can't be left blank!";
-            return false;
+
         }
 
         if (!errorMessage.equals("")) {
@@ -134,6 +132,7 @@ public class NewCustomerActivity extends AppCompatActivity {
             dlgAlert.setPositiveButton("OK", null);
             dlgAlert.setCancelable(true);
             dlgAlert.create().show();
+            return false;
         }
         return true;
     }
