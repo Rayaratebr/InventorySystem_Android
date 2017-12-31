@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.dell.inventory_system_android.Config;
 import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.ListingActivity;
 import com.example.dell.inventory_system_android.Models.Customer;
@@ -15,13 +17,17 @@ import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivit
 import com.example.dell.inventory_system_android.R;
 import com.example.dell.inventory_system_android.ViewActivity;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ViewCustomerActivity extends ViewActivity{
 
 //    int currentCustomerID = -1;
     Customer customer;
     TextView customerDetailsLbl;
 
-    Button addOrderBtn,addPaymentBtn,viewOrdersBtn,viewPaymentsBtn;
+    Button addOrderBtn,addPaymentBtn,viewOrdersBtn,viewPaymentsBtn,deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,8 @@ public class ViewCustomerActivity extends ViewActivity{
         viewOrdersBtn = (Button) findViewById(R.id.viewOrdersBtn);
         viewPaymentsBtn = (Button) findViewById(R.id.viewPaymentsBtn);
         customerDetailsLbl = (TextView) findViewById(R.id.textViewCustDtls);
+        deleteBtn = (Button) findViewById(R.id.buttonDelete);
+
 
 //        params = getIntent().getExtras();
 //        currentCustomerID = Helpers.getIDForActivity(params);
@@ -63,6 +71,15 @@ public class ViewCustomerActivity extends ViewActivity{
                 ViewCustomerActivity.this.startActivity(myIntent);
             }
         });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+
+        });
+
 
     }
 

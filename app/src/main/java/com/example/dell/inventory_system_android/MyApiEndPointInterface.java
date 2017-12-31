@@ -30,6 +30,9 @@ public interface MyApiEndPointInterface {
     @POST("customers")
     Call<String> storeCustomer(@Body Customer customer);
 
+    @POST("customers")
+    Call<Customer> deleteCustomer(@Body Customer customer);
+
     /*
     *
     * Payment APIs
