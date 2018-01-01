@@ -14,6 +14,7 @@ import com.example.dell.inventory_system_android.Models.Customer;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.ObjectViewAsyncTask;
 import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
+import com.example.dell.inventory_system_android.PaymentActivities.NewPaymentActivity;
 import com.example.dell.inventory_system_android.R;
 import com.example.dell.inventory_system_android.ViewActivity;
 
@@ -90,6 +91,17 @@ public class ViewCustomerActivity extends ViewActivity{
                 });
             }
 
+        });
+
+        addPaymentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(ViewCustomerActivity.this,
+                        NewPaymentActivity.class);
+                myIntent.putExtra("customerName",customer.getName());
+                NewPaymentActivity.currentCustomerID = objectID;
+                ViewCustomerActivity.this.startActivity(myIntent);
+            }
         });
 
 

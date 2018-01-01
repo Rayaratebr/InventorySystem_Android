@@ -1,8 +1,9 @@
 package com.example.dell.inventory_system_android.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Customer extends Parent{
+public class Customer extends Parent implements Serializable{
     private int id;
     private String name;
     private String address;

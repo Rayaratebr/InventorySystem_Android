@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.dell.inventory_system_android.Config;
 import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.Models.Payment;
@@ -13,11 +15,15 @@ import com.example.dell.inventory_system_android.ObjectViewAsyncTask;
 import com.example.dell.inventory_system_android.R;
 import com.example.dell.inventory_system_android.ViewActivity;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class ViewPaymentActivity extends ViewActivity {
     Payment payment;
     TextView txtPaymentDetails;
-    Button viewCustomer, viewOrder;
+    Button viewCustomer, viewOrder, deletePayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,7 @@ public class ViewPaymentActivity extends ViewActivity {
         txtPaymentDetails = (TextView) findViewById(R.id.textViewPaymentDtls);
         viewCustomer = (Button) findViewById(R.id.viewCustomer);
         viewOrder = (Button) findViewById(R.id.viewOrder);
+        deletePayment = (Button) findViewById(R.id.buttonDeleterPayment);
 
         ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewPaymentActivity.this);
         asyncTask.execute(objectID, Helpers.PAYMENT);
@@ -42,6 +49,25 @@ public class ViewPaymentActivity extends ViewActivity {
             @Override
             public void onClick(View view) {
                 //TODO CALL VIEW ORDER ACTIVITY
+            }
+        });
+
+        deletePayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Call<Payment> repos = Config.apiService.deletePayment(objectID);
+                repos.enqueue(new Callback<Payment>() {
+                    @Override
+                    public void onResponse(Call<Payment> call, Response<Payment> response) {
+                        Toast.makeText(ViewPaymentActivity.this, "Success", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Payment> call, Throwable t) {
+                        Toast.makeText(ViewPaymentActivity.this, "Error", Toast.LENGTH_LONG).show();
+
+                    }
+                });
             }
         });
     }

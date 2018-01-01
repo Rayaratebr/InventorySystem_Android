@@ -28,7 +28,7 @@ import com.example.dell.inventory_system_android.MainActivity;
  */
 public class NotifyService extends Service {
 
-    String strCustomerID;
+    String strCustomerID,customerName;
     Notification notification;
 
     /**
@@ -61,6 +61,7 @@ public class NotifyService extends Service {
 
         Bundle bundle= intent.getExtras();
         strCustomerID = (String) bundle.get("CUSTOMER_ID");
+        customerName = (String) bundle.get("Customer_Name");
 
         // If this service was started by out AlarmTask intent then we want to show our notification
         if(intent.getBooleanExtra(INTENT_NOTIFY, false))
@@ -88,7 +89,7 @@ public class NotifyService extends Service {
         int icon = R.drawable.ic_dialog_alert;
         // This is the scrolling text of the notification
 
-        String text = "Today is payment due date for customer "  +strCustomerID;
+        String text = "Today is payment due date for customer "  +strCustomerID + customerName;
         // What time to show on the notification
         long time = System.currentTimeMillis();
         // The PendingIntent to launch our activity if the user selects this notification

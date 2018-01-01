@@ -16,10 +16,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.Models.Order;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.Models.Product;
 import com.example.dell.inventory_system_android.R;
+import com.example.dell.inventory_system_android.connectionAsyncTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +49,9 @@ public class ChooseProductsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_products);
+
+        connectionAsyncTask asyncTask = new connectionAsyncTask(ChooseProductsActivity.this);
+        asyncTask.execute(Helpers.PRODUCT);
 
         lv = (ListView) findViewById(R.id.listView);
 

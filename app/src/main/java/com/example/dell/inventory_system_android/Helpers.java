@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Models.Customer;
@@ -14,7 +15,9 @@ import com.example.dell.inventory_system_android.Models.Payment;
 import com.example.dell.inventory_system_android.Models.Product;
 import com.example.dell.inventory_system_android.CustomerActivities.*;
 import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
+import com.example.dell.inventory_system_android.OrderActivities.ViewOrderActivity;
 import com.example.dell.inventory_system_android.ProductActivities.NewProductActivity;
+import com.example.dell.inventory_system_android.ProductActivities.ViewProductActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,12 +33,17 @@ public class Helpers {
     public static final int ORDER = 3;
 
     public static final int CUSTOMER_ORDERS = 4;
+    public static final int CUSTOMER_PAYMENTS = 5;
 
     public static final Map<Integer, Class> showActivity = new HashMap<Integer, Class>() {
         {
             put(CUSTOMER, ViewCustomerActivity.class);
             put(ORDER, NewOrderActivity.class);
             put(PRODUCT, NewProductActivity.class);
+            put(CUSTOMER_ORDERS, ViewOrderActivity.class);
+            put(CUSTOMER_PAYMENTS, ViewOrderActivity.class);
+            put(PRODUCT, ViewProductActivity.class);
+
 
         }
     };

@@ -19,10 +19,12 @@ import android.widget.Toast;
 
 
 import com.example.dell.inventory_system_android.Config;
+import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Order;
 import com.example.dell.inventory_system_android.PaymentActivities.NewPaymentActivity;
 import com.example.dell.inventory_system_android.R;
+import com.example.dell.inventory_system_android.connectionAsyncTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -181,7 +183,6 @@ public class NewOrderActivity extends AppCompatActivity {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                orderId.setText(Integer.toString(MainActivity.currentOrderID));
                 if (!customerIDTxt.isEnabled()) {
                     customerIDTxt.setText("");
                 }
@@ -200,8 +201,11 @@ public class NewOrderActivity extends AppCompatActivity {
         listProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent myIntent = new Intent(NewOrderActivity.this,
                         ChooseProductsActivity.class);
+
+
                 myIntent.putExtra("sampleObject", objOrder);
                 //myIntent.putExtra("Order", (Parcelable) objOrder);
                 NewOrderActivity.this.startActivity(myIntent);
