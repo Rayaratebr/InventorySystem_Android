@@ -44,7 +44,22 @@ public class searchAsyncTask extends AsyncTask<String, String, List<Parent>> {
                 break;
 
             case Helpers.ORDER:
-                displayList = Helpers.getOrdersList(activity);
+                String orderDateFrom = null, orderDateTo = null,orderDueDateFrom = null, orderDueDateTo = null;
+                if (params.length > 1) {
+                    if (!params[1].equals("")) {
+                        orderDateFrom = params[1];
+                    }
+                    if (!params[2].equals("")) {
+                        orderDateTo = params[2];
+                    }
+                    if (!params[3].equals("")) {
+                        orderDueDateFrom = params[3];
+                    }
+                    if (!params[4].equals("")) {
+                        orderDueDateTo = params[4];
+                    }
+                }
+                displayList = Helpers.getOrdersList(activity,orderDateFrom,orderDateTo,orderDueDateFrom,orderDueDateTo);
                 break;
 
             case Helpers.PRODUCT:

@@ -2,11 +2,7 @@ package com.example.dell.inventory_system_android.OrderActivities;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,8 +51,8 @@ public class NewOrderActivity extends AppCompatActivity {
 
 
         myCalendar = Calendar.getInstance();
-        orderDateTxt = (EditText) findViewById(R.id.orderDateTxt);
-        orderDueDateTxt = (EditText) findViewById(R.id.orderDueDateTxt);
+        orderDateTxt = (EditText) findViewById(R.id.orderDateFromTxt);
+        orderDueDateTxt = (EditText) findViewById(R.id.orderDueDateFromTxt);
         orderId = (TextView) findViewById(R.id.orderID);
         customerIDTxt = (EditText) findViewById(R.id.customerIDTxt);
 
@@ -104,7 +100,6 @@ public class NewOrderActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel(orderDueDateTxt);
                 objOrder.setOrderDueDate(getDateFromDatePicket(view));
-
             }
         };
         orderDateTxt.setOnClickListener(new View.OnClickListener() {

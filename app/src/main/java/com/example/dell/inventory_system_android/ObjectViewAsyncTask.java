@@ -52,7 +52,6 @@ public class ObjectViewAsyncTask extends AsyncTask<Integer,String ,Parent>
     protected void onPostExecute(Parent viewObject) {
 
         super.onPostExecute(viewObject);
-
         activity.setObject(viewObject);
 
     }

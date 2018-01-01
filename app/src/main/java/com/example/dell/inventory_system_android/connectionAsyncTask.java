@@ -43,7 +43,7 @@ public class connectionAsyncTask extends AsyncTask<Integer, String, List<Parent>
                 break;
 
             case Helpers.ORDER:
-                displayList = Helpers.getOrdersList(activity);
+                displayList = Helpers.getOrdersList(activity,null,null,null,null);
                 break;
 
             case Helpers.PRODUCT:
@@ -52,6 +52,10 @@ public class connectionAsyncTask extends AsyncTask<Integer, String, List<Parent>
 
             case Helpers.CUSTOMER_ORDERS:
                 displayList = Helpers.getCustomerOrdersList(activity, ID);
+                break;
+
+            case Helpers.CUSTOMER_PAYMENTS:
+                displayList = Helpers.getCustomerPaymentsList(activity, ID);
                 break;
 
         }

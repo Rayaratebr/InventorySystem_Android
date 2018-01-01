@@ -14,6 +14,8 @@ import com.example.dell.inventory_system_android.Models.Payment;
 import com.example.dell.inventory_system_android.Models.Product;
 import com.example.dell.inventory_system_android.CustomerActivities.*;
 import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
+import com.example.dell.inventory_system_android.OrderActivities.ViewOrderActivity;
+import com.example.dell.inventory_system_android.PaymentActivities.ViewPaymentActivity;
 import com.example.dell.inventory_system_android.ProductActivities.NewProductActivity;
 
 import java.util.HashMap;
@@ -28,14 +30,17 @@ public class Helpers {
     public static final int PRODUCT = 1;
     public static final int PAYMENT = 2;
     public static final int ORDER = 3;
-
     public static final int CUSTOMER_ORDERS = 4;
+    public static final int CUSTOMER_PAYMENTS = 5;
+
 
     public static final Map<Integer, Class> showActivity = new HashMap<Integer, Class>() {
         {
             put(CUSTOMER, ViewCustomerActivity.class);
-            put(ORDER, NewOrderActivity.class);
+            put(ORDER, ViewOrderActivity.class);
             put(PRODUCT, NewProductActivity.class);
+            put(CUSTOMER_ORDERS, ViewOrderActivity.class);
+            put(CUSTOMER_PAYMENTS, ViewPaymentActivity.class);
 
         }
     };
@@ -62,8 +67,8 @@ public class Helpers {
         }
     }
 
-    public static List<Parent> getOrdersList(Activity activity) {
-        Call<List<Order>> repos = Config.apiService.getAllOrders();
+    public static List<Parent> getOrdersList(Activity activity,String orderDateFrom,String orderDateTo,String orderDueDateFrom,String orderDueDateTo) {
+        Call<List<Order>> repos = Config.apiService.getAllOrders(orderDateFrom,orderDateTo,orderDueDateFrom,orderDueDateTo);
         try {
             return (List<Parent>) (Object) repos.execute().body();
 
@@ -84,6 +89,19 @@ public class Helpers {
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(activity, "ERROR: Can't fetch Customer Orders", Toast.LENGTH_LONG).show();
+            returnToMainActivity(activity);
+
+            return null;
+        }
+    }
+    public static List<Parent> getCustomerPaymentsList(Activity activity, int customerID) {
+        Call<List<Payment>> repos = Config.apiService.getCustomerPayments(customerID);
+        try {
+            return (List<Parent>) (Object) repos.execute().body();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(activity, "ERROR: Can't fetch Customer Payments", Toast.LENGTH_LONG).show();
             returnToMainActivity(activity);
 
             return null;

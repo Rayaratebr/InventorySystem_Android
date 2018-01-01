@@ -73,6 +73,20 @@ public class ViewCustomerActivity extends ViewActivity{
             }
         });
 
+        viewPaymentsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(ViewCustomerActivity.this,
+                        ListingActivity.class);
+//                Bundle b = new Bundle();
+//                b.putInt("ID",objectID); //Your id
+//                myIntent.putExtras(b); //Put your id to your next Intent
+                ListingActivity.showType = Helpers.CUSTOMER_PAYMENTS;
+                ListingActivity.ID = objectID;
+                ViewCustomerActivity.this.startActivity(myIntent);
+            }
+        });
+
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
