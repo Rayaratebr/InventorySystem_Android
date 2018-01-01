@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Models.Parent;
+import com.example.dell.inventory_system_android.OrderActivities.ChooseProductsActivity;
+import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +18,15 @@ public class connectionAsyncTask extends AsyncTask<Integer, String, List<Parent>
 
     private Activity activity;//3shan amarri2 el activity la had el class 3shan a2dr ast3ml el motheds eli fih
     private Fragment fragment;
+    private ChooseProductsActivity myProductActivity;
 
     public connectionAsyncTask(Activity activity, Fragment fragment) {
         this.activity = activity;
         this.fragment = fragment;
+    }
+
+   public connectionAsyncTask(ChooseProductsActivity activity){
+        this.myProductActivity = activity;
     }
 
     @Override
@@ -67,6 +74,14 @@ public class connectionAsyncTask extends AsyncTask<Integer, String, List<Parent>
 
         super.onPostExecute(displayList);
         DisplayFragment displayFragment = (DisplayFragment) fragment;
-        displayFragment.fillList(displayList);
+
+
+        try{
+            displayFragment.fillList(displayList);
+        }
+        catch (NullPointerException e){
+            myProductActivity.fillList(displayList);
+        }
+
     }
 }

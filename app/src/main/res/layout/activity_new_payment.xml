@@ -16,7 +16,7 @@
         android:layout_marginLeft="128dp"
         android:layout_marginStart="128dp"
         android:layout_marginTop="42dp"
-        android:text="Payment #" />
+        android:text="Payment " />
 
     <TextView
         android:id="@+id/paymentID"

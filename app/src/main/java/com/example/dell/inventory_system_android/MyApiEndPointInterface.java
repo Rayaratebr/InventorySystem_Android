@@ -37,7 +37,7 @@ public interface MyApiEndPointInterface {
     Call<String> storeCustomer(@Body Customer customer);
 
     @DELETE("customers/{customer_id}")
-    Call<String> deleteCustomer(@Path("customer_id") int customer_id);
+    Call<Customer> deleteCustomer(@Path("customer_id") int customer_id);
 
     /*
     *
@@ -57,7 +57,7 @@ public interface MyApiEndPointInterface {
     Call<String> storeCustomerPayment(@Path("customer_id") int customer_id, @Body Payment payment);
 
     @DELETE("payments/{payment_id}")
-    Call<String> deletePayment(@Path("payment_id") int payment_id);
+    Call<Payment> deletePayment(@Path("payment_id") int payment_id);
 
 
     /*
@@ -78,7 +78,7 @@ public interface MyApiEndPointInterface {
     Call<String> storeProduct(@Body Product product);
 
     @DELETE("products/{product_id}")
-    Call<String> deleteProduct(@Path("product_id") int product_id);
+    Call<Product> deleteProduct(@Path("product_id") int product_id);
 
     /*
       *
@@ -109,7 +109,7 @@ public interface MyApiEndPointInterface {
 
 
     @DELETE("orders/{order_id}")
-    Call<String> deleteOrder(@Path("order_id") int order_id);
+    Call<Order> deleteOrder(@Path("order_id") int order_id);
 
 
 }

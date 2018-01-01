@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Models.Customer;
@@ -17,6 +18,7 @@ import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivit
 import com.example.dell.inventory_system_android.OrderActivities.ViewOrderActivity;
 import com.example.dell.inventory_system_android.PaymentActivities.ViewPaymentActivity;
 import com.example.dell.inventory_system_android.ProductActivities.NewProductActivity;
+import com.example.dell.inventory_system_android.ProductActivities.ViewProductActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +43,8 @@ public class Helpers {
             put(PRODUCT, NewProductActivity.class);
             put(CUSTOMER_ORDERS, ViewOrderActivity.class);
             put(CUSTOMER_PAYMENTS, ViewPaymentActivity.class);
+            put(PRODUCT, ViewProductActivity.class);
+
 
         }
     };
@@ -60,7 +64,7 @@ public class Helpers {
             return (List<Parent>) (Object) repos.execute().body();
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             Toast.makeText(activity, "ERROR: Can't fetch Customers", Toast.LENGTH_LONG).show();
 
             return null;

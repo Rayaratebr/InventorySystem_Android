@@ -44,9 +44,9 @@ public class ScheduleService extends Service {
     /**
      * Show an alarm for a certain date when the alarm is called it will pop up a notification
      */
-    public void setAlarm(Calendar c, int id) {
+    public void setAlarm(Calendar c, int id,String customerName) {
         // This starts a new thread to set the alarm
         // You want to push off your tasks onto a new thread to free up the UI to carry on responding
-        new AlarmTask(this, c,id).run();
+        new AlarmTask(this, c,id,customerName).run();
     }
 }

@@ -96,13 +96,13 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer #"
         android:layout_alignBaseline="@+id/txtCustID"
         android:layout_alignBottom="@+id/txtCustID"
-        android:layout_toRightOf="@+id/textView7"
-        android:layout_toEndOf="@+id/textView7"
         android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp" />
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/textView7"
+        android:layout_toRightOf="@+id/textView7"
+        android:text="Customer " />
 
     <EditText
         android:id="@+id/txtCustName"

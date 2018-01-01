@@ -10,11 +10,11 @@ import android.widget.Toast;
 import com.example.dell.inventory_system_android.Config;
 import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.ListingActivity;
-import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Customer;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.ObjectViewAsyncTask;
 import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
+import com.example.dell.inventory_system_android.PaymentActivities.NewPaymentActivity;
 import com.example.dell.inventory_system_android.R;
 import com.example.dell.inventory_system_android.ViewActivity;
 
@@ -90,24 +90,32 @@ public class ViewCustomerActivity extends ViewActivity{
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<String> repos = Config.apiService.deleteCustomer(customer.getId());
-                repos.enqueue(new Callback<String>() {
+                Call<Customer> repos = Config.apiService.deleteCustomer(objectID);
+                repos.enqueue(new Callback<Customer>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Toast.makeText(ViewCustomerActivity.this, response.body(), Toast.LENGTH_LONG).show();
-                        Intent myIntent = new Intent(ViewCustomerActivity.this,
-                                MainActivity.class);
-                        ViewCustomerActivity.this.startActivity(myIntent);
-
+                    public void onResponse(Call<Customer> call, Response<Customer> response) {
+                        Toast.makeText(ViewCustomerActivity.this, "Success", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(ViewCustomerActivity.this, "error", Toast.LENGTH_LONG).show();
+                    public void onFailure(Call<Customer> call, Throwable t) {
+                        Toast.makeText(ViewCustomerActivity.this, "Error", Toast.LENGTH_LONG).show();
+
                     }
                 });
             }
 
+        });
+
+        addPaymentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(ViewCustomerActivity.this,
+                        NewPaymentActivity.class);
+                myIntent.putExtra("customerName",customer.getName());
+                NewPaymentActivity.currentCustomerID = objectID;
+                ViewCustomerActivity.this.startActivity(myIntent);
+            }
         });
 
 

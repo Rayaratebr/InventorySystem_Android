@@ -43,8 +43,6 @@ public class NewCustomerActivity extends AppCompatActivity {
         Button btnCancelCust = (Button) findViewById(R.id.btnAddOrder);
         Button btnClear = (Button) findViewById(R.id.btnClr);
 
-        final TextView txtCustID = (TextView) findViewById(R.id.txtCustID);
-        txtCustID.setText(Integer.toString(currentCustomerID));
 
 
         final EditText txtName = (EditText) findViewById(R.id.txtCustName);
@@ -98,7 +96,6 @@ public class NewCustomerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 currentCustomerID = MainActivity.currentCustID;
-                txtCustID.setText(Integer.toString(currentCustomerID));
                 txtName.setText("");
                 txtPhone.setText("");
                 txtAddress.setText("");

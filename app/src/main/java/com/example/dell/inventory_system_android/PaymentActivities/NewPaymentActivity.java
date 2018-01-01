@@ -30,13 +30,14 @@ import retrofit2.Response;
 public class NewPaymentActivity extends AppCompatActivity {
 
     Payment objPayment;
-    EditText paymentDueDate,paymentAmount;
+    EditText paymentDueDate,paymentAmount,customerIDTxt;
     Calendar myCalendar;
     public static int currentCustomerID;
     DatePickerDialog.OnDateSetListener paymentDueDateListener;
     private Button addPayment,cancelPayment, clearPayment, backPayment;
     AlertDialog.Builder dlgAlert;
     ScheduleClient scheduleClient;
+    String customerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,9 @@ public class NewPaymentActivity extends AppCompatActivity {
 
         scheduleClient = new ScheduleClient(this);
         scheduleClient.doBindService();
+
+        Bundle b = getIntent().getExtras() ;
+        customerName = b.getString("customerName");
 
         dlgAlert = new AlertDialog.Builder(this);
 
@@ -57,6 +61,14 @@ public class NewPaymentActivity extends AppCompatActivity {
         cancelPayment = (Button) findViewById(R.id.btnCclPayment);
         backPayment = (Button) findViewById(R.id.btnBackPayment);
         clearPayment = (Button) findViewById(R.id.btnClrPayment);
+
+        customerIDTxt = (EditText)findViewById(R.id.txtCustIDPayment);
+
+        //If this activity is opened from customer view
+        if (currentCustomerID > 0) {
+            customerIDTxt.setText(currentCustomerID + "");
+            customerIDTxt.setEnabled(false);
+        }
 
 
         objPayment = new Payment();
@@ -114,6 +126,7 @@ public class NewPaymentActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel(paymentDueDate);
+                scheduleClient.setAlarmForNotification(myCalendar,currentCustomerID,customerName);
                 //objPayment.setPayment_date(getDateFromDatePicket(view));
 
             }
@@ -131,6 +144,8 @@ public class NewPaymentActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
 
@@ -140,7 +155,9 @@ public class NewPaymentActivity extends AppCompatActivity {
         editText.setText(sdf.format(myCalendar.getTime()));
     }
 
-    private String getDateFromDatePicket(DatePicker datePicker) {
+
+
+  /*  private String getDateFromDatePicker(DatePicker datePicker) {
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
         int year = datePicker.getYear();
@@ -151,7 +168,7 @@ public class NewPaymentActivity extends AppCompatActivity {
         SimpleDateFormat tf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
         return tf.format(calendar.getTime());
-    }
+    }*/
 
     boolean verifyFields(String errorMessage){
         //TODO CHECK IF DATE IS IN THE PAST
