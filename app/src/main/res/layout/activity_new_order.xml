@@ -8,7 +8,7 @@
 
 
     <EditText
-        android:id="@+id/orderDueDateTxt"
+        android:id="@+id/orderDueDateFromTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -16,13 +16,13 @@
         android:hint="dd/mm/yyyy"
         android:inputType="none"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/orderDateTxt"
-        android:layout_alignStart="@+id/orderDateTxt"
-        android:layout_alignRight="@+id/orderDateTxt"
-        android:layout_alignEnd="@+id/orderDateTxt" />
+        android:layout_alignLeft="@+id/orderDateFromTxt"
+        android:layout_alignStart="@+id/orderDateFromTxt"
+        android:layout_alignRight="@+id/orderDateFromTxt"
+        android:layout_alignEnd="@+id/orderDateFromTxt" />
 
     <EditText
-        android:id="@+id/orderDateTxt"
+        android:id="@+id/orderDateFromTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="27dp"
@@ -30,7 +30,7 @@
         android:editable="false"
         android:hint="dd/mm/yyyy"
         android:inputType="none"
-        android:layout_above="@+id/orderDueDateTxt"
+        android:layout_above="@+id/orderDueDateFromTxt"
         android:layout_alignLeft="@+id/customerIDTxt"
         android:layout_alignStart="@+id/customerIDTxt"
         android:layout_alignRight="@+id/customerIDTxt"
@@ -52,8 +52,8 @@
         android:layout_marginLeft="76dp"
         android:layout_marginStart="76dp"
         android:text="Order Date"
-        android:layout_alignBaseline="@+id/orderDateTxt"
-        android:layout_alignBottom="@+id/orderDateTxt"
+        android:layout_alignBaseline="@+id/orderDateFromTxt"
+        android:layout_alignBottom="@+id/orderDateFromTxt"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -61,7 +61,7 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/orderDueDateTxt"
+        android:layout_alignBottom="@+id/orderDueDateFromTxt"
         android:layout_alignLeft="@+id/textView9"
         android:layout_alignStart="@+id/textView9"
         android:text="Due Date" />
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="27dp"
         android:text="Customer ID"
-        android:layout_above="@+id/orderDateTxt"
+        android:layout_above="@+id/orderDateFromTxt"
         android:layout_alignLeft="@+id/textView9"
         android:layout_alignStart="@+id/textView9" />
 

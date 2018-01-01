@@ -16,7 +16,9 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import com.example.dell.inventory_system_android.CustomerActivities.*;
 import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
+import com.example.dell.inventory_system_android.OrderActivities.SearchOrderActivity;
 import com.example.dell.inventory_system_android.ProductActivities.NewProductActivity;
+import com.example.dell.inventory_system_android.ProductActivities.SearchProductActivity;
 
 import static com.example.dell.inventory_system_android.Helpers.showActivity;
 
@@ -131,12 +133,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     NewCustomerActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
-
-        if(id == R.id.nav_customer_search){
-            myIntent = new Intent(MainActivity.this,
-                    SearchCustomerActivity.class);
-            MainActivity.this.startActivity(myIntent);
-        }
    
         if (id == R.id.nav_customer_order) {
             //hide the activity
@@ -162,6 +158,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_close) {
             finish();
         }
+
+        if(id == R.id.nav_customer_search){
+            myIntent = new Intent(MainActivity.this,
+                    SearchCustomerActivity.class);
+            MainActivity.this.startActivity(myIntent);
+        }
+
+        if(id == R.id.nav_order_search){
+            myIntent = new Intent(MainActivity.this,
+                    SearchOrderActivity.class);
+            MainActivity.this.startActivity(myIntent);
+        }
+
+        if(id == R.id.nav_product_search){
+            myIntent = new Intent(MainActivity.this,
+                    SearchProductActivity.class);
+            MainActivity.this.startActivity(myIntent);
+        }
+
+
+
+
+
+
         drawerLayout.closeDrawers();
 
         return true;

@@ -16,8 +16,8 @@ public class ListingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing);
-        displayFragment = (DisplayFragment) getFragmentManager().findFragmentById(R.id.fragment);
 
+        displayFragment = (DisplayFragment) getFragmentManager().findFragmentById(R.id.fragment);
         connectionAsyncTask asyncTask = new connectionAsyncTask(ListingActivity.this,displayFragment);
         asyncTask.execute(showType,ID);
         displayFragment.setShowActivity(showActivity.get(showType));

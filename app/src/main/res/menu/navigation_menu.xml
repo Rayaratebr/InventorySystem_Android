@@ -33,6 +33,9 @@
                 android:title="Add a New Order"
                 android:id="@+id/nav_order_add"
                 android:icon="@drawable/addorder"/>
+            <item
+                android:id="@+id/nav_order_search"
+                android:title="Search Orders" />
             <item android:title="Edit an Order"
                 android:id="@+id/nav_order_edit"
                 android:icon="@drawable/edit"/>
@@ -46,6 +49,9 @@
                 android:id="@+id/nav_product_display"
                 android:title="Display All Products"
                 android:icon="@drawable/show"/>
+            <item
+                android:id="@+id/nav_product_search"
+                android:title="Search Products" />
             <item android:title="Add a New Product"
                 android:id="@+id/nav_product_add"
                 android:icon="@drawable/store"/>

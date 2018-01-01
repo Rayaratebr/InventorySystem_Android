@@ -85,7 +85,12 @@ public interface MyApiEndPointInterface {
       * Orders APIs
       * */
     @GET("orders")
-    Call<List<Order>> getAllOrders();
+    Call<List<Order>> getAllOrders(
+            @Query("orderDateFrom")String orderDateFrom,
+            @Query("orderDateTo")String orderDateTo,
+            @Query("orderDueDateFrom")String orderDueDateFrom,
+            @Query("orderDueDateTo")String orderDueDateTo
+    );
 
     @GET("orders/{order_id}")
     Call<Order> getOrder(@Path("order_id") int order_id);
@@ -98,6 +103,10 @@ public interface MyApiEndPointInterface {
 
     @GET("customers/{customer_id}/orders")
     Call<List<Order>> getCustomerOrders(@Path("customer_id") int customer_id);
+
+    @GET("customers/{customer_id}/payments")
+    Call<List<Payment>> getCustomerPayments(@Path("customer_id") int customer_id);
+
 
     @DELETE("orders/{order_id}")
     Call<Order> deleteOrder(@Path("order_id") int order_id);

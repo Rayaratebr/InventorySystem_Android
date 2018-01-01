@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProductActivities.NewProductActivity" />
+        <activity android:name=".ListingActivity" />
         <activity android:name=".PaymentActivities.NewPaymentActivity" />
         <activity android:name=".OrderActivities.ChooseProductsActivity" />
 
@@ -37,7 +38,9 @@
         <activity android:name=".PaymentActivities.ViewPaymentActivity" />
         <activity android:name=".CustomerActivities.SearchCustomerActivity" />
         <activity android:name=".ProductActivities.SearchProductActivity" />
+        <activity android:name=".OrderActivities.SearchOrderActivity"></activity>
         <activity android:name=".ProductActivities.ViewProductActivity"></activity>
+
     </application>
 
 </manifest>
