@@ -28,7 +28,7 @@ public class ViewCustomerActivity extends ViewActivity{
     Customer customer;
     TextView customerDetailsLbl;
 
-    Button addOrderBtn,addPaymentBtn,viewOrdersBtn,viewPaymentsBtn,deleteBtn;
+    Button addOrderBtn,addPaymentBtn,viewOrdersBtn,viewPaymentsBtn,deleteBtn, backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class ViewCustomerActivity extends ViewActivity{
         viewPaymentsBtn = (Button) findViewById(R.id.viewPaymentsBtn);
         customerDetailsLbl = (TextView) findViewById(R.id.textViewCustDtls);
         deleteBtn = (Button) findViewById(R.id.buttonDelete);
+        backBtn = (Button) findViewById(R.id.backButton);
 
 
 //        params = getIntent().getExtras();
@@ -57,6 +58,12 @@ public class ViewCustomerActivity extends ViewActivity{
                 NewOrderActivity.currentCustomerID = objectID;
 
                 ViewCustomerActivity.this.startActivity(myIntent);
+            }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
         viewOrdersBtn.setOnClickListener(new View.OnClickListener() {

@@ -28,7 +28,7 @@ public class ViewOrderActivity extends ViewActivity {
     Order order;
     TextView orderDetailsLbl;
 
-    Button addPaymentBtn,viewPaymentsBtn, deleteOrder;
+    Button addPaymentBtn,viewPaymentsBtn, deleteOrder, backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,14 @@ public class ViewOrderActivity extends ViewActivity {
         addPaymentBtn = (Button) findViewById(R.id.addPaymentBtnOrder);
         viewPaymentsBtn = (Button) findViewById(R.id.viewPaymentsBtnOrder);
         deleteOrder = (Button) findViewById(R.id.buttonDeleterOrder);
+        backBtn = (Button) findViewById(R.id.backButton);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
 

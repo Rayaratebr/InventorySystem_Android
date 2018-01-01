@@ -38,12 +38,18 @@
 
 
 
-
             <Button
-                android:id="@+id/viewCustomerProduct"
+                android:id="@+id/relatedOrders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="View Related Customer" />
+                android:text="View Related Orders"
+                />
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back" />
 
         </LinearLayout>
 

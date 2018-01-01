@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class ViewPaymentActivity extends ViewActivity {
     Payment payment;
     TextView txtPaymentDetails;
-    Button viewCustomer, viewOrder, deletePayment;
+    Button viewCustomer, viewOrder, deletePayment, backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,14 @@ public class ViewPaymentActivity extends ViewActivity {
         viewCustomer = (Button) findViewById(R.id.viewCustomer);
         viewOrder = (Button) findViewById(R.id.viewOrder);
         deletePayment = (Button) findViewById(R.id.buttonDeleterPayment);
+        backBtn = (Button) findViewById(R.id.backButton);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewPaymentActivity.this);
         asyncTask.execute(objectID, Helpers.PAYMENT);

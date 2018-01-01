@@ -23,15 +23,23 @@ public class ViewProductActivity extends ViewActivity {
 
     Product product;
     TextView txtProductDetails;
-    Button viewCustomer, deleteProduct;
+    Button viewOrders, deleteProduct,backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_product);
 
-        viewCustomer = (Button) findViewById(R.id.viewCustomerProduct);
+        viewOrders = (Button) findViewById(R.id.relatedOrders);
         deleteProduct = (Button) findViewById(R.id.buttonDeleteProduct);
+        backBtn = (Button) findViewById(R.id.backButton);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         txtProductDetails = (TextView) findViewById(R.id.textViewProductDtls);
 
@@ -39,10 +47,10 @@ public class ViewProductActivity extends ViewActivity {
         ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewProductActivity.this);
         asyncTask.execute(objectID, Helpers.PRODUCT);
 
-        viewCustomer.setOnClickListener(new View.OnClickListener() {
+        viewOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO CALL VIEW CUSTOMER ACTIVITY
+                //TODO VIEW ORDERS THAT HAVE THIS PRODUCT
             }
         });
 
