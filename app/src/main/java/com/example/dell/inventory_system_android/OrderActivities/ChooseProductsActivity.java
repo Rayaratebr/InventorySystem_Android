@@ -38,7 +38,7 @@ public class ChooseProductsActivity extends AppCompatActivity {
     private int quantity;
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
-    private ArrayList<Product> productsList;
+    private ArrayList<Product> productsList= new ArrayList<Product>();
     private final Context context = this;
 
     private Button btnDone, btnCancel;
@@ -102,13 +102,10 @@ public class ChooseProductsActivity extends AppCompatActivity {
 
                 //TODO add the selected product to the order
                 builder.show();
-                productsList=
-                        new ArrayList<Product>();
                 productsList.add(new Product((listing.get(i).getId()),quantity));
               // list.put(new Integer(listing.get(i).getId()),new Integer(quantity));
-                Intent myIntent = getIntent();
-                Order objOrder = (Order) myIntent.getSerializableExtra("sampleObject");
-                objOrder.setProducts(productsList);
+
+
 
             }
         });
@@ -117,6 +114,9 @@ public class ChooseProductsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO ADD THE PRODUCTS TO THE ORDER
+                Bundle b = getIntent().getExtras();
+                Order objOrder =(Order) b.getSerializable("sampleObject");
+                objOrder.setProducts(productsList);
                 finish();
             }
         });

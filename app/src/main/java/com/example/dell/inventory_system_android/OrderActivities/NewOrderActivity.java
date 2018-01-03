@@ -231,7 +231,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
     boolean verifyFields(String errorMessage) {
         Log.w("^^^^^^",objOrder.getProducts().size()+"");
-        if ((objOrder.getProducts()).isEmpty()) {
+        if ((objOrder.getProducts()) == null) {
             errorMessage += "You must select at least one product\n";
         }
         if (objOrder.getOrderDate() == null ) {

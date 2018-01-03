@@ -80,12 +80,11 @@ public class NewPaymentActivity extends AppCompatActivity {
                 String errorMessage = "";
                 boolean valid = verifyFields(errorMessage);
                 if (valid){
-                    Payment payment = new Payment();
                    // payment.setPayment_date(getDateFromDatePicket(view));
                    // payment.setId();
-                    Intent myIntent = getIntent();
-                    Order objOrder = (Order) myIntent.getSerializableExtra("sampleObject");
-                    objOrder.setPayment(payment);
+                    Bundle b = getIntent().getExtras();
+                    Order objOrder =(Order) b.getSerializable("sampleObject");
+                    objOrder.setPayment(objPayment);
                     Double amount = Double.parseDouble(paymentAmount.getText().toString());
                     String paymentDate = paymentDueDate.getText().toString();
 
