@@ -46,4 +46,12 @@ public class Payment extends Parent{
 
         return "Amount: " + amount + ", Customer: " + customer_id + ", PaymentDate: "+payment_date;
     }
+
+    @Override
+    public String toString() {
+        return "Payment ID: " + id
+                +"\n Amount: " +amount
+                +"\n Payment Due Date: "+payment_date
+                +"\n Customer ID: "+customer_id;
+    }
 }

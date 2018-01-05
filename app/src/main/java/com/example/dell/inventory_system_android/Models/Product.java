@@ -60,6 +60,12 @@ public class Product extends Parent{
                 ", unit='" + unit + '\'' +
                 '}';
     }
+    public String displayProduct(){
+        return "Product ID: " + id
+                +"\n Standard Price: "+standard_price
+                +"\n Available Quantity: "+quantity
+                +"\n Unit: "+unit;
+    }
 
     public String listDisplay() {
 

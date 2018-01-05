@@ -71,6 +71,12 @@ public class Order extends Parent implements Serializable {
 //                ", products=" + products +
                 '}';
     }
+    public String displayOrder(){
+        return "Order ID: " +id +
+                "\n Order Date: " +order_date+
+                "\n Order Due Date: " +order_due_date +
+                "\n Customer ID: " +customer_id ;
+    }
 
     public String listDisplay() {
 

@@ -132,7 +132,8 @@ public class ViewCustomerActivity extends ViewActivity{
     public void setObject(Parent object){
 
         this.customer = (Customer)object;
-        customerDetailsLbl.setText(customer.toString());//TODO: make it prettier
+        customerDetailsLbl.setText(customer.displayCustomer());//TODO: make it prettier
+        //customerDetailsLbl.setFontFeatureSettings();
     }
 
 

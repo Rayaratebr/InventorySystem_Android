@@ -65,6 +65,12 @@ public class Customer extends Parent implements Serializable{
                 ", phone='" + phone + '\'' +
                 '}';
     }
+    public String displayCustomer(){
+        return "ID: " +id +
+                "\n Customer Name: " +name+
+                "\n Address: " +address +
+                "\n Phone: " +phone ;
+    }
 
     public String listDisplay() {
 

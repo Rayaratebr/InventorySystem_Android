@@ -79,7 +79,7 @@ public class ViewProductActivity extends ViewActivity {
     @Override
     public void setObject(Parent object) {
         this.product = (Product)object;
-        txtProductDetails.setText(product.toString());//TODO: make it prettier
+        txtProductDetails.setText(product.displayProduct());//TODO: make it prettier
     }
 }
 

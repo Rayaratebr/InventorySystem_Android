@@ -153,6 +153,6 @@ public class ViewOrderActivity extends ViewActivity {
     public void setObject(Parent object){
 
         this.order = (Order)object;
-        orderDetailsLbl.setText(order.toString());//TODO: make it prettier
+        orderDetailsLbl.setText(order.displayOrder());//TODO: make it prettier
     }
 }
