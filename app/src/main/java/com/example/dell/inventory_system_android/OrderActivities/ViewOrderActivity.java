@@ -9,8 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Config;
+import com.example.dell.inventory_system_android.CustomerActivities.ViewCustomerActivity;
 import com.example.dell.inventory_system_android.Helpers;
 import com.example.dell.inventory_system_android.ListingActivity;
+import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Order;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.ObjectViewAsyncTask;
@@ -75,19 +77,28 @@ public class ViewOrderActivity extends ViewActivity {
      deleteOrder.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
-             Call<Order> repos = Config.apiService.deleteOrder(objectID);
-             repos.enqueue(new Callback<Order>() {
+             Call<String> repos = Config.apiService.deleteOrder(objectID);
+             repos.enqueue(new Callback<String>() {
                  @Override
-                 public void onResponse(Call<Order> call, Response<Order> response) {
-                     Toast.makeText(ViewOrderActivity.this, "Success", Toast.LENGTH_LONG).show();
+                 public void onResponse(Call<String> call, Response<String> response) {
+                     Toast.makeText(ViewOrderActivity.this, response.body(), Toast.LENGTH_LONG).show();
+
                  }
 
                  @Override
-                 public void onFailure(Call<Order> call, Throwable t) {
+                 public void onFailure(Call<String> call, Throwable t) {
                      Toast.makeText(ViewOrderActivity.this, "Error", Toast.LENGTH_LONG).show();
 
                  }
              });
+
+             Intent myIntent = new Intent(ViewOrderActivity.this,
+                     MainActivity.class);
+             myIntent.putExtra("fromAnotherActivity",Helpers.ORDER);
+             ViewOrderActivity.this.startActivity(myIntent);
+             finish();
+
+
          }
      });
     }

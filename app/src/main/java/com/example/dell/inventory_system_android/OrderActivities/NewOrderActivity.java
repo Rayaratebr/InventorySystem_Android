@@ -35,7 +35,7 @@ public class NewOrderActivity extends AppCompatActivity {
     private Button addOrderBtn, closeButton, backButton, clearButton, assignPayment, listProducts;
     TextView orderId;
     Calendar myCalendar;
-    Order objOrder;
+    public static Order objOrder;
     public static int currentCustomerID;
     DatePickerDialog.OnDateSetListener orderDateListener, orderDueDateListener;
     AlertDialog.Builder dlgAlert;
@@ -76,6 +76,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
         assignPayment = (Button) findViewById(R.id.btnPaymentOrder);
         listProducts = (Button) findViewById(R.id.btnSlctProducts);
+
 
         //  orderId.setText(MainActivity.currentOrderID + " ");
 
@@ -140,7 +141,7 @@ public class NewOrderActivity extends AppCompatActivity {
                 if (valid) {
                     //TODO SEND CUSTOMER ID AND ORDER DETAILS TO BE STORED
                 /*storing the new order to database using port request*/
-                    Call<String> repos = Config.apiService.storeCustomerOrder(1, objOrder);
+                    Call<String> repos = Config.apiService.storeCustomerOrder(Integer.parseInt(customerIDTxt.getText().toString()), objOrder);
                     repos.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
@@ -231,6 +232,9 @@ public class NewOrderActivity extends AppCompatActivity {
 
     boolean verifyFields(String errorMessage) {
         Log.w("^^^^^^",objOrder.getProducts().size()+"");
+        if (customerIDTxt.getText().equals("")) {
+            errorMessage += "You must select a customer\n";
+        }
         if ((objOrder.getProducts()).isEmpty()) {
             errorMessage += "You must select at least one product\n";
         }

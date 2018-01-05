@@ -12,8 +12,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
+
 import com.example.dell.inventory_system_android.CustomerActivities.*;
 import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
 import com.example.dell.inventory_system_android.OrderActivities.SearchOrderActivity;
@@ -31,8 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DisplayFragment displayFragment;
     FragmentManager fragmentManager = getFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-
+    Bundle bundle;
 
 
     public static int currentCustID = 0, currentOrderID = 0, currentProductID = 0;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         displayFragment = (DisplayFragment) getFragmentManager().findFragmentById(R.id.displayFragment);
@@ -92,9 +92,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this,displayFragment);
-        asyncTask.execute(Helpers.CUSTOMER);
-        displayFragment.setShowActivity(showActivity.get(Helpers.CUSTOMER));
+        bundle = getIntent().getExtras();
+        int  fromAnotherActivity = -1;
+        if (bundle != null) {
+            Log.w("dammit:","wohooooow");
+
+            fromAnotherActivity = bundle.getInt("fromAnotherActivity");
+        }
+        int showType = fromAnotherActivity >= 0 ? fromAnotherActivity : Helpers.CUSTOMER;
+        Log.w("shooooooooooooow:",""+showType);
+        connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this, displayFragment);
+        asyncTask.execute(showType);
+        displayFragment.setShowActivity(showActivity.get(showType));
 
     }
 
@@ -115,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (isDisplayItem(id)) {
 //            displayInFragment(id);
             int showType = Helpers.menuShowItemsType.get(id);
-            connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this,displayFragment);
+            connectionAsyncTask asyncTask = new connectionAsyncTask(MainActivity.this, displayFragment);
             asyncTask.execute(showType);
             displayFragment.setShowActivity(showActivity.get(showType));
         }
@@ -133,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     NewCustomerActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
-   
+
         if (id == R.id.nav_customer_order) {
             //hide the activity
             //finish();
@@ -159,27 +168,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
         }
 
-        if(id == R.id.nav_customer_search){
+        if (id == R.id.nav_customer_search) {
             myIntent = new Intent(MainActivity.this,
                     SearchCustomerActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
 
-        if(id == R.id.nav_order_search){
+        if (id == R.id.nav_order_search) {
             myIntent = new Intent(MainActivity.this,
                     SearchOrderActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
 
-        if(id == R.id.nav_product_search){
+        if (id == R.id.nav_product_search) {
             myIntent = new Intent(MainActivity.this,
                     SearchProductActivity.class);
             MainActivity.this.startActivity(myIntent);
         }
-
-
-
-
 
 
         drawerLayout.closeDrawers();
@@ -223,9 +228,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   /*  private boolean isSearchItem(int id){
         return id == R.id.nav_customer_search || id == R.id.nav_order_search || id == R.id.nav_product_search;
     }*/
-
-
-
 
 
 }
