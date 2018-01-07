@@ -83,14 +83,17 @@ public class NewPaymentActivity extends AppCompatActivity {
                     Payment payment = new Payment();
                    // payment.setPayment_date(getDateFromDatePicket(view));
                    // payment.setId();
-                    Intent myIntent = getIntent();
-                    Order objOrder = (Order) myIntent.getSerializableExtra("sampleObject");
-                    objOrder.setPayment(payment);
+//                    Intent myIntent = getIntent();
+//                    Order objOrder = (Order) myIntent.getSerializableExtra("sampleObject");
+//                    objOrder.setPayment(payment);
                     Double amount = Double.parseDouble(paymentAmount.getText().toString());
-                    String paymentDate = paymentDueDate.getText().toString();
+//                    String paymentDate = paymentDueDate.getText().toString();
+                    Long customerId = Long.valueOf(customerIDTxt.getText().toString());
 
+                    objPayment.setCustomer_id(customerId);
+                    objPayment.setOrder_id(1);//FIXME
                     objPayment.setAmount(amount);
-                    objPayment.setPayment_date(paymentDate);
+//                    objPayment.setPayment_date(paymentDate);
                     //TODO IF EVERYTHING IS FINE ADD THE CUSTOMER AND INCREMENT THE ID
                 /*storing the new customer to database using port request*/
                     Call<String> repos = Config.apiService.storePayment(objPayment);
@@ -127,7 +130,7 @@ public class NewPaymentActivity extends AppCompatActivity {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 updateLabel(paymentDueDate);
                 scheduleClient.setAlarmForNotification(myCalendar,currentCustomerID,customerName);
-                //objPayment.setPayment_date(getDateFromDatePicket(view));
+                objPayment.setPayment_date(getDateFromDatePicket(view));
 
             }
         };
@@ -157,18 +160,17 @@ public class NewPaymentActivity extends AppCompatActivity {
 
 
 
-  /*  private String getDateFromDatePicker(DatePicker datePicker) {
+    private String getDateFromDatePicket(DatePicker datePicker) {
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
         int year = datePicker.getYear();
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
-        scheduleClient.setAlarmForNotification(calendar,currentCustomerID);
         SimpleDateFormat tf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
         return tf.format(calendar.getTime());
-    }*/
+    }
 
     boolean verifyFields(String errorMessage){
         //TODO CHECK IF DATE IS IN THE PAST
