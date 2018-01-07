@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,6 +52,8 @@ public class ChooseProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_products);
 
+
+
         connectionAsyncTask asyncTask = new connectionAsyncTask(ChooseProductsActivity.this);
         asyncTask.execute(Helpers.PRODUCT);
 
@@ -65,40 +68,14 @@ public class ChooseProductsActivity extends AppCompatActivity {
         lv.setAdapter(adapter);
 
 
-        builder = new AlertDialog.Builder(context);
-        dialog = builder.create();
-        builder.setTitle("Quantity");
-        builder.setMessage("Enter the quantity wanted of this product");
+
         list = new HashMap<Integer, Integer>();
 
 
 
-// Set up the input
-        final EditText input = new EditText(this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        builder.setView(input);
 
-        builder.setPositiveButton("OK",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        quantity = Integer.parseInt((input.getText().toString()));
-                        if (quantity > ((Product) (listing.get(clickedItem))).getQuantity()) {
-                            Toast.makeText(ChooseProductsActivity.this, "Please choose appropriate quantity", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                        NewOrderActivity.objOrder.getProducts().add(new Product((listing.get(clickedItem).getId()), quantity));
 
-                    }
-                });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialog.cancel();
-            }
-        });
-        builder.setCancelable(true);
+
 
 
 
@@ -107,7 +84,37 @@ public class ChooseProductsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 //TODO add the selected product to the order
+                builder = new AlertDialog.Builder(context);
+                dialog = builder.create();
+                builder.setTitle("Quantity");
+                builder.setMessage("Enter the quantity wanted of this product");
+                // Set up the input
+                final EditText input = new EditText(context);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                builder.setView(input);
+                builder.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                quantity = Integer.parseInt((input.getText().toString()));
+                                if (quantity > ((Product) (listing.get(clickedItem))).getQuantity()) {
+                                    Toast.makeText(ChooseProductsActivity.this, "Please choose appropriate quantity", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                                NewOrderActivity.objOrder.getProducts().add(new Product((listing.get(clickedItem).getId()), quantity));
+
+                            }
+                        });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setCancelable(true);
                 builder.show();
+               // ((ViewGroup)input.getParent()).removeView(input);
                 clickedItem = i;
 //                productsList = new ArrayList<Product>();
 //                // list.put(new Integer(listing.get(i).getId()),new Integer(quantity));
@@ -158,4 +165,5 @@ public class ChooseProductsActivity extends AppCompatActivity {
         }
 
     }
+
 }

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Config;
 import com.example.dell.inventory_system_android.MainActivity;
+import com.example.dell.inventory_system_android.Models.Customer;
 import com.example.dell.inventory_system_android.Models.Order;
 import com.example.dell.inventory_system_android.Models.Payment;
 import com.example.dell.inventory_system_android.OrderActivities.NewOrderActivity;
@@ -47,8 +48,6 @@ public class NewPaymentActivity extends AppCompatActivity {
         scheduleClient = new ScheduleClient(this);
         scheduleClient.doBindService();
 
-        Bundle b = getIntent().getExtras() ;
-        customerName = b.getString("customerName");
 
         dlgAlert = new AlertDialog.Builder(this);
 
@@ -63,16 +62,24 @@ public class NewPaymentActivity extends AppCompatActivity {
         clearPayment = (Button) findViewById(R.id.btnClrPayment);
 
         customerIDTxt = (EditText)findViewById(R.id.txtCustIDPayment);
+        Intent myIntent = getIntent();
+        Bundle b = myIntent.getExtras();
+        objPayment = new Payment();
 
         //If this activity is opened from customer view
         if (currentCustomerID > 0) {
             customerIDTxt.setText(currentCustomerID + "");
             customerIDTxt.setEnabled(false);
+            Customer customer = (Customer) b.get("customer");
+            customer.addPayment(objPayment);
         }
+        //was opened from new order activity
+        else {
+            Order order = (Order) b.get("order");
+            order.setPayment(objPayment);
+    }
 
-
-        objPayment = new Payment();
-        objPayment.setCustomer_id(currentCustomerID);
+       // objPayment.setCustomer_id(currentCustomerID);
 
         addPayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,19 +88,12 @@ public class NewPaymentActivity extends AppCompatActivity {
                 boolean valid = verifyFields(errorMessage);
                 if (valid){
                     Payment payment = new Payment();
-                   // payment.setPayment_date(getDateFromDatePicket(view));
-                   // payment.setId();
-//                    Intent myIntent = getIntent();
-//                    Order objOrder = (Order) myIntent.getSerializableExtra("sampleObject");
-//                    objOrder.setPayment(payment);
-                    Double amount = Double.parseDouble(paymentAmount.getText().toString());
-//                    String paymentDate = paymentDueDate.getText().toString();
-                    Long customerId = Long.valueOf(customerIDTxt.getText().toString());
+                    double amount = Double.parseDouble(paymentAmount.getText().toString());
+                    long customerId = Long.valueOf(customerIDTxt.getText().toString());
 
                     objPayment.setCustomer_id(customerId);
                     objPayment.setOrder_id(1);//FIXME
                     objPayment.setAmount(amount);
-//                    objPayment.setPayment_date(paymentDate);
                     //TODO IF EVERYTHING IS FINE ADD THE CUSTOMER AND INCREMENT THE ID
                 /*storing the new customer to database using port request*/
                     Call<String> repos = Config.apiService.storePayment(objPayment);

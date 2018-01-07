@@ -9,7 +9,7 @@ public class Customer extends Parent implements Serializable{
     private String address;
     private String phone;
     private static ArrayList<Customer> customersList = new ArrayList<>();
-
+    private static ArrayList<Payment> paymentsList = new ArrayList<>();
     public static ArrayList<Customer> getCustomersList() {
         return customersList;
     }
@@ -54,6 +54,10 @@ public class Customer extends Parent implements Serializable{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void addPayment(Payment payment){
+        paymentsList.add(payment);
     }
 
     @Override
