@@ -1,5 +1,6 @@
 package com.example.dell.inventory_system_android.PaymentActivities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +10,11 @@ import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Config;
 import com.example.dell.inventory_system_android.Helpers;
+import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.Models.Payment;
 import com.example.dell.inventory_system_android.ObjectViewAsyncTask;
+import com.example.dell.inventory_system_android.OrderActivities.ViewOrderActivity;
 import com.example.dell.inventory_system_android.R;
 import com.example.dell.inventory_system_android.ViewActivity;
 
@@ -63,19 +66,24 @@ public class ViewPaymentActivity extends ViewActivity {
         deletePayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Payment> repos = Config.apiService.deletePayment(objectID);
-                repos.enqueue(new Callback<Payment>() {
+                Call<String> repos = Config.apiService.deletePayment(objectID);
+                repos.enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(Call<Payment> call, Response<Payment> response) {
-                        Toast.makeText(ViewPaymentActivity.this, "Success", Toast.LENGTH_LONG).show();
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Toast.makeText(ViewPaymentActivity.this, response.body(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onFailure(Call<Payment> call, Throwable t) {
+                    public void onFailure(Call<String> call, Throwable t) {
                         Toast.makeText(ViewPaymentActivity.this, "Error", Toast.LENGTH_LONG).show();
 
                     }
                 });
+                Intent myIntent = new Intent(ViewPaymentActivity.this,
+                        MainActivity.class);
+                myIntent.putExtra("fromAnotherActivity",Helpers.ORDER);
+                ViewPaymentActivity.this.startActivity(myIntent);
+                finish();
             }
         });
     }

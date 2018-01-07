@@ -40,6 +40,7 @@ public class ChooseProductsActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private ArrayList<Product> productsList= new ArrayList<Product>();
     private final Context context = this;
+    private int clickedItem = -1;
 
     private Button btnDone, btnCancel;
 
@@ -64,11 +65,11 @@ public class ChooseProductsActivity extends AppCompatActivity {
         lv.setAdapter(adapter);
 
 
-       builder = new AlertDialog.Builder(context);
+        builder = new AlertDialog.Builder(context);
         dialog = builder.create();
         builder.setTitle("Quantity");
         builder.setMessage("Enter the quantity wanted of this product");
-        list= new HashMap<Integer, Integer>();
+        list = new HashMap<Integer, Integer>();
 
 
 
@@ -78,11 +79,16 @@ public class ChooseProductsActivity extends AppCompatActivity {
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
 
-       builder.setPositiveButton("OK",
+        builder.setPositiveButton("OK",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                       quantity = Integer.parseInt((input.getText().toString()));
+                        quantity = Integer.parseInt((input.getText().toString()));
+                        if (quantity > ((Product) (listing.get(clickedItem))).getQuantity()) {
+                            Toast.makeText(ChooseProductsActivity.this, "Please choose appropriate quantity", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        NewOrderActivity.objOrder.getProducts().add(new Product((listing.get(clickedItem).getId()), quantity));
 
                     }
                 });
@@ -102,6 +108,12 @@ public class ChooseProductsActivity extends AppCompatActivity {
 
                 //TODO add the selected product to the order
                 builder.show();
+                clickedItem = i;
+//                productsList = new ArrayList<Product>();
+//                // list.put(new Integer(listing.get(i).getId()),new Integer(quantity));
+//                Intent myIntent = getIntent();
+//                Order objOrder = (Order) myIntent.getSerializableExtra("sampleObject");
+//                objOrder.setProducts(productsList);
                 productsList.add(new Product((listing.get(i).getId()),quantity));
               // list.put(new Integer(listing.get(i).getId()),new Integer(quantity));
 
@@ -139,7 +151,7 @@ public class ChooseProductsActivity extends AppCompatActivity {
         stringList.clear();
         for (Parent item : myList) {
             stringList.add(item.listDisplay());
-            Log.w("ListData",item.listDisplay());
+            Log.w("ListData", item.listDisplay());
         }
         if (adapter != null) {
             adapter.notifyDataSetChanged();

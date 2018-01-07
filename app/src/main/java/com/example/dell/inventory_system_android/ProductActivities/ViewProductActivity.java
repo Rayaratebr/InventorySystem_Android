@@ -1,5 +1,7 @@
 package com.example.dell.inventory_system_android.ProductActivities;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +11,11 @@ import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Config;
 import com.example.dell.inventory_system_android.Helpers;
+import com.example.dell.inventory_system_android.MainActivity;
 import com.example.dell.inventory_system_android.Models.Parent;
 import com.example.dell.inventory_system_android.Models.Product;
 import com.example.dell.inventory_system_android.ObjectViewAsyncTask;
+import com.example.dell.inventory_system_android.OrderActivities.SearchOrderActivity;
 import com.example.dell.inventory_system_android.R;
 import com.example.dell.inventory_system_android.ViewActivity;
 
@@ -59,19 +63,30 @@ public class ViewProductActivity extends ViewActivity {
         deleteProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Product> repos = Config.apiService.deleteProduct(objectID);
-                repos.enqueue(new Callback<Product>() {
+                Call<String> repos = Config.apiService.deleteProduct(objectID);
+                repos.enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(Call<Product> call, Response<Product> response) {
-                        Toast.makeText(ViewProductActivity.this, "Success", Toast.LENGTH_LONG).show();
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Toast.makeText(ViewProductActivity.this, response.body(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onFailure(Call<Product> call, Throwable t) {
-                        Toast.makeText(ViewProductActivity.this, "Error", Toast.LENGTH_LONG).show();
+                    public void onFailure(Call<String> call, Throwable t) {
+//                        Toast.makeText(ViewProductActivity.this, "Error", Toast.LENGTH_LONG).show();
 
                     }
                 });
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent myIntent = new Intent(ViewProductActivity.this,
+                                MainActivity.class);
+                        ViewProductActivity.this.startActivity(myIntent);
+                        finish();
+                    }
+                }, 2000);
+
             }
         });
     }
