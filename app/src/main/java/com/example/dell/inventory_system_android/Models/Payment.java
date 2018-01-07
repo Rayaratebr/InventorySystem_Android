@@ -7,6 +7,7 @@ public class Payment extends Parent{
     private double amount;
     private String payment_date;//TODO: check date type
     private long customer_id;
+    private long order_id;
 
 
 
@@ -40,6 +41,14 @@ public class Payment extends Parent{
 
     public void setCustomer_id(long customer_id) {
         this.customer_id = customer_id;
+    }
+
+    public long getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(long order_id) {
+        this.order_id = order_id;
     }
 
     public String listDisplay() {
