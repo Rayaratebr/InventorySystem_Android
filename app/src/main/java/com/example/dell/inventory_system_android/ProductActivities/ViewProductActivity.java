@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +49,8 @@ public class ViewProductActivity extends ViewActivity {
 
         txtProductDetails = (TextView) findViewById(R.id.textViewProductDtls);
 
+        final Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        deleteProduct.setAnimation(shake);
 
         ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewProductActivity.this);
         asyncTask.execute(objectID, Helpers.PRODUCT);
@@ -63,6 +67,7 @@ public class ViewProductActivity extends ViewActivity {
         deleteProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(shake);
                 Call<String> repos = Config.apiService.deleteProduct(objectID);
                 repos.enqueue(new Callback<String>() {
                     @Override

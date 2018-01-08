@@ -190,7 +190,7 @@ public class NewOrderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent myIntent = new Intent(NewOrderActivity.this,
                         NewPaymentActivity.class);
-                myIntent.putExtra("sampleObject", objOrder);
+                myIntent.putExtra("order", objOrder);
                 NewOrderActivity.this.startActivity(myIntent);
             }
         });

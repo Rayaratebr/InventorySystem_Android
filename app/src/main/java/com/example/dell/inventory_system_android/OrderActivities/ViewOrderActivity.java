@@ -1,12 +1,18 @@
 package com.example.dell.inventory_system_android.OrderActivities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +29,7 @@ import com.example.dell.inventory_system_android.R;
 import com.example.dell.inventory_system_android.ViewActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,27 +41,78 @@ public class ViewOrderActivity extends ViewActivity {
 
     Order order;
     TextView orderDetailsLbl;
-
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
     Button addPaymentBtn,viewPaymentsBtn, deleteOrder, backBtn, assignCustomer;
-
+    Context context = this;
+    Activity activity = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_order);
 
+        ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewOrderActivity.this);
+        asyncTask.execute(objectID,Helpers.ORDER);
 
         addPaymentBtn = (Button) findViewById(R.id.addPaymentBtnOrder);
         viewPaymentsBtn = (Button) findViewById(R.id.viewPaymentsBtnOrder);
         deleteOrder = (Button) findViewById(R.id.buttonDeleterOrder);
         backBtn = (Button) findViewById(R.id.backButton);
         assignCustomer = (Button) findViewById(R.id.assignCustomer);
+        final Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        deleteOrder.setAnimation(shake);
+
 
         assignCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                final EditText input = new EditText(context);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                builder = new AlertDialog.Builder(context);
+                dialog = builder.create();
+                builder.setTitle("Choose Customer")
+                        .setMessage("Enter Customer ID")
+                        .setView(input)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener(){
 
-                final ArrayList<Customer> customers = new ArrayList<Customer>();//use function to get all customers in the DB
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                long newCustomerID = Long.parseLong((input.getText()).toString());
+                                order.setCustomer_id(newCustomerID);
+                                Call<String> repos = Config.apiService.updateOrder(objectID,order);
+                                repos.enqueue(new Callback<String>() {
+                                    @Override
+                                    public void onResponse(Call<String> call, Response<String> response) {
+                                        Toast.makeText(ViewOrderActivity.this, response.body(), Toast.LENGTH_LONG).show();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<String> call, Throwable t) {
+                                        Toast.makeText(ViewOrderActivity.this, "error", Toast.LENGTH_LONG).show();
+
+                                    }
+                                });
+                            }
+                        });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setCancelable(true);
+                builder.show();
+            }
+        });
+
+     /*   assignCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                List<Customer> customers = Helpers.getAllCustomersList(activity);//use function to get all customers in the DB
                 final CharSequence[] items = {};
                 for (int i = 0 ; i < customers.size() ; i++){
                     items[i] = customers.get(i).getName();
@@ -62,9 +120,9 @@ public class ViewOrderActivity extends ViewActivity {
 
 // arraylist to keep the selected items
                 final ArrayList seletedItems=new ArrayList();
-                AlertDialog dialog = new AlertDialog.Builder(getApplicationContext())
-                        .setTitle("Select The Customer")
-                        .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+                dialog = new AlertDialog.Builder(context);
+                        dialog.setTitle("Select The Customer");
+                        dialog.setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
                                 if (isChecked) {
@@ -89,7 +147,7 @@ public class ViewOrderActivity extends ViewActivity {
                         }).create();
                 dialog.show();
             }
-        });
+        });*/
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,8 +161,6 @@ public class ViewOrderActivity extends ViewActivity {
 //        params = getIntent().getExtras();
 //        currentCustomerID = Helpers.getIDForActivity(params);
 
-        ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewOrderActivity.this);
-        asyncTask.execute(objectID, Helpers.ORDER);
 
      /*   addPaymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +189,7 @@ public class ViewOrderActivity extends ViewActivity {
      deleteOrder.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
+             view.startAnimation(shake);
              Call<String> repos = Config.apiService.deleteOrder(objectID);
              repos.enqueue(new Callback<String>() {
                  @Override
@@ -164,6 +221,6 @@ public class ViewOrderActivity extends ViewActivity {
     public void setObject(Parent object){
 
         this.order = (Order)object;
-        orderDetailsLbl.setText(order.displayOrder());//TODO: make it prettier
+       orderDetailsLbl.setText(order.displayOrder());
     }
 }

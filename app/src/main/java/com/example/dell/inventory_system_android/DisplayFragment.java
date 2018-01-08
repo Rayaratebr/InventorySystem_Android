@@ -67,6 +67,7 @@ public class DisplayFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),
                         showActivity);
                 ViewActivity.objectID = listing.get(i).getId();
+                intent.putExtra("object",listing.get(i));
 //                Bundle b = new Bundle();
 //                b.putInt("ID", listing.get(i).getId()); //Your id
 //                intent.putExtras(b); //Put your id to your next Intent

@@ -10,9 +10,9 @@ public class Customer extends Parent implements Serializable{
     private String phone;
     private static ArrayList<Customer> customersList = new ArrayList<>();
     private static ArrayList<Payment> paymentsList = new ArrayList<>();
-    public static ArrayList<Customer> getCustomersList() {
+    /*public static ArrayList<Customer> getCustomersList() {
         return customersList;
-    }
+    }*/
 
     public Customer() {
 

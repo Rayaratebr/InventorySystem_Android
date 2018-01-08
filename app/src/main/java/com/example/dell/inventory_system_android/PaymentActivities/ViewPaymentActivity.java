@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +41,9 @@ public class ViewPaymentActivity extends ViewActivity {
         deletePayment = (Button) findViewById(R.id.buttonDeleterPayment);
         backBtn = (Button) findViewById(R.id.backButton);
 
+        final Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        deletePayment.setAnimation(shake);
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,6 +71,7 @@ public class ViewPaymentActivity extends ViewActivity {
         deletePayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(shake);
                 Call<String> repos = Config.apiService.deletePayment(objectID);
                 repos.enqueue(new Callback<String>() {
                     @Override
@@ -91,6 +97,6 @@ public class ViewPaymentActivity extends ViewActivity {
     @Override
     public void setObject(Parent object) {
         this.payment = (Payment)object;
-        txtPaymentDetails.setText(payment.toString());//TODO: make it prettier
+       //txtPaymentDetails.setText(payment.toString());//TODO: make it prettier
     }
 }

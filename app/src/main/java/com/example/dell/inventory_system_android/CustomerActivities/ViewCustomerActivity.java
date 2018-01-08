@@ -3,6 +3,8 @@ package com.example.dell.inventory_system_android.CustomerActivities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +49,9 @@ public class ViewCustomerActivity extends ViewActivity{
         customerDetailsLbl = (TextView) findViewById(R.id.textViewCustDtls);
         deleteBtn = (Button) findViewById(R.id.buttonDelete);
         backBtn = (Button) findViewById(R.id.backButton);
+
+        final Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        deleteBtn.setAnimation(shake);
 
 
 //        params = getIntent().getExtras();
@@ -102,6 +107,7 @@ public class ViewCustomerActivity extends ViewActivity{
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(shake);
                 Call<String> repos = Config.apiService.deleteCustomer(objectID);
                 repos.enqueue(new Callback<String>() {
                     @Override
@@ -132,7 +138,7 @@ public class ViewCustomerActivity extends ViewActivity{
             public void onClick(View view) {
                 Intent myIntent = new Intent(ViewCustomerActivity.this,
                         NewPaymentActivity.class);
-                myIntent.putExtra("customerName",customer.getName());
+                myIntent.putExtra("customer",customer);
                 NewPaymentActivity.currentCustomerID = objectID;
                 ViewCustomerActivity.this.startActivity(myIntent);
             }

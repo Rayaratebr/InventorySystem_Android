@@ -1,8 +1,9 @@
 package com.example.dell.inventory_system_android.Models;
 
 
+import java.io.Serializable;
 
-public class Parent {
+public class Parent implements Serializable {
 
     public String listDisplay() {
 

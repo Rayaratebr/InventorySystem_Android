@@ -76,6 +76,7 @@ public class NewPaymentActivity extends AppCompatActivity {
         //was opened from new order activity
         else {
             Order order = (Order) b.get("order");
+            objPayment.setOrder_id(order.getId());
             order.setPayment(objPayment);
     }
 

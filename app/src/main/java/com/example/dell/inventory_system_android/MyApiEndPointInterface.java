@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -29,6 +30,8 @@ public interface MyApiEndPointInterface {
             @Query("phone") String phone
 
             );
+  //  @GET("customers")
+  //  Call<List<Customer>> getAllCustomers();
 
     @GET("customers/{customer_id}")
     Call<Customer> getCustomer(@Path("customer_id") int customer_id);
@@ -91,6 +94,9 @@ public interface MyApiEndPointInterface {
             @Query("orderDueDateFrom")String orderDueDateFrom,
             @Query("orderDueDateTo")String orderDueDateTo
     );
+
+    @PUT("orders/{order_id}")
+    Call<String> updateOrder(@Path("order_id") int order_id,@Body Order order);
 
     @GET("orders/{order_id}")
     Call<Order> getOrder(@Path("order_id") int order_id);
