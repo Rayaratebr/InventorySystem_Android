@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -97,6 +98,9 @@ public interface MyApiEndPointInterface {
 
     @POST("orders")
     Call<String> storeOrder(@Body Order order);
+
+    @PUT("orders/{order_id}")
+    Call<String> updateOrder(@Path("order_id") int order_id,@Body Order order);
 
     @POST("customers/{customer_id}/orders")
     Call<String> storeCustomerOrder(@Path("customer_id") int customer_id, @Body Order order);

@@ -38,8 +38,15 @@ public class ViewPaymentActivity extends ViewActivity {
         viewOrder = (Button) findViewById(R.id.viewOrder);
         deletePayment = (Button) findViewById(R.id.buttonDeleterPayment);
 
-        ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewPaymentActivity.this);
-        asyncTask.execute(objectID, Helpers.PAYMENT);
+        if (objectID > 0) {
+            ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewPaymentActivity.this);
+            asyncTask.execute(objectID, Helpers.PAYMENT);
+        } else {
+            Intent myIntent = getIntent();
+            Payment objOrder = (Payment) myIntent.getSerializableExtra("object");
+            this.setObject(objOrder);
+        }
+
 
         viewCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +80,7 @@ public class ViewPaymentActivity extends ViewActivity {
                 });
                 Intent myIntent = new Intent(ViewPaymentActivity.this,
                         MainActivity.class);
-                myIntent.putExtra("fromAnotherActivity",Helpers.ORDER);
+                myIntent.putExtra("fromAnotherActivity", Helpers.ORDER);
                 ViewPaymentActivity.this.startActivity(myIntent);
                 finish();
             }
@@ -82,7 +89,7 @@ public class ViewPaymentActivity extends ViewActivity {
 
     @Override
     public void setObject(Parent object) {
-        this.payment = (Payment)object;
+        this.payment = (Payment) object;
         txtPaymentDetails.setText(payment.toString());//TODO: make it prettier
     }
 }
