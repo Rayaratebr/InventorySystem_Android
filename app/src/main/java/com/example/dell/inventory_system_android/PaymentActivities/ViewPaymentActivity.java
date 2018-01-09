@@ -51,8 +51,15 @@ public class ViewPaymentActivity extends ViewActivity {
             }
         });
 
-        ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewPaymentActivity.this);
-        asyncTask.execute(objectID, Helpers.PAYMENT);
+        if (objectID > 0) {
+            ObjectViewAsyncTask asyncTask = new ObjectViewAsyncTask(ViewPaymentActivity.this);
+            asyncTask.execute(objectID, Helpers.PAYMENT);
+        } else {
+            Intent myIntent = getIntent();
+            Payment objOrder = (Payment) myIntent.getSerializableExtra("object");
+            this.setObject(objOrder);
+        }
+
 
         viewCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +104,6 @@ public class ViewPaymentActivity extends ViewActivity {
     @Override
     public void setObject(Parent object) {
         this.payment = (Payment)object;
-       //txtPaymentDetails.setText(payment.toString());//TODO: make it prettier
+        txtPaymentDetails.setText(payment.toString());//TODO: make it prettier
     }
 }

@@ -104,6 +104,9 @@ public interface MyApiEndPointInterface {
     @POST("orders")
     Call<String> storeOrder(@Body Order order);
 
+    @PUT("orders/{order_id}")
+    Call<String> updateOrder(@Path("order_id") int order_id,@Body Order order);
+
     @POST("customers/{customer_id}/orders")
     Call<String> storeCustomerOrder(@Path("customer_id") int customer_id, @Body Order order);
 

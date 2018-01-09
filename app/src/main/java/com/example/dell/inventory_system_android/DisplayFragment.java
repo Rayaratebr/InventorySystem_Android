@@ -17,8 +17,10 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.dell.inventory_system_android.Models.Customer;
+import com.example.dell.inventory_system_android.Models.Order;
 import com.example.dell.inventory_system_android.Models.Parent;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +69,8 @@ public class DisplayFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),
                         showActivity);
                 ViewActivity.objectID = listing.get(i).getId();
-                intent.putExtra("object",listing.get(i));
+                intent.putExtra("object", listing.get(i));
+
 //                Bundle b = new Bundle();
 //                b.putInt("ID", listing.get(i).getId()); //Your id
 //                intent.putExtras(b); //Put your id to your next Intent
